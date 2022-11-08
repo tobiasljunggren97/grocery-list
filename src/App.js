@@ -11,7 +11,8 @@ function App() {
   const [groceryList, setGroceryList] = useState(JSON.parse(localStorage.getItem('groceryList')) || [])
   const [savedGroceries, setSavedGroceries] = useState(JSON.parse(localStorage.getItem('savedGroceries')) || [])
   const [checkedList, setCheckedList] = useState(JSON.parse(localStorage.getItem('checkedList')) || [])
-  const [categories, setCategories] = useState(JSON.parse(localStorage.getItem('categories')) || ["Uncategorized"])
+  const firstCategory = "Uncategorized"
+  const [categories, setCategories] = useState(JSON.parse(localStorage.getItem('categories')) || [firstCategory])
   const [displayAutoComplete, setDisplayAutoComplete] = useState(false)
   const [newItem, setNewItem] = useState('')
   const [dragging, setDragging] = useState(false)
@@ -33,7 +34,7 @@ function App() {
     // if the input is empty, do nothing
     if(itemToAdd !== '') {
       const capitalizedItem = itemToAdd.charAt(0).toUpperCase() + itemToAdd.slice(1).toLowerCase()
-      checkIfSaved(capitalizedItem)
+      checkIfSaved(capitalizedItem, firstCategory)
       // if the input is not already in the grocery list, add it
       if(groceryList.some(e => e.item === capitalizedItem)) {
         //Item already exists, put it on top
@@ -54,36 +55,11 @@ function App() {
         handleDelete(index, checkedList, setCheckedList)
       }
 
-      const newGroceryList = [...groceryList, {item: capitalizedItem, quantity: quantity || 1, category: 'Uncategorized'}]
+      const newGroceryList = [...groceryList, {item: capitalizedItem, quantity: quantity || 1, category: firstCategory}]
       setGroceryList(newGroceryList)
       setNewItem('')
     }
   }
-
-
-  function checkIfSaved(groceryItem){
-      // Check if item is added to savedGroceries
-      if(!savedGroceries.some(item => item === groceryItem)) { 
-        setSavedGroceries(prevSavedGroceries => [groceryItem, ...prevSavedGroceries])
-      } else {
-        // if the input is already in the saved groceries, move it to the top
-        const index = savedGroceries.indexOf(groceryItem)
-        const newSavedGroceries = savedGroceries
-        newSavedGroceries.splice(index, 1)
-        setSavedGroceries([groceryItem, ...newSavedGroceries])
-      }    
-  }
-
-
-  function handleQuantity(index, value, list, setList) {
-    if(value === 0){
-      handleDelete(index, list, setList)  
-      return
-    }
-    const newList = [...list]
-    newList[index] = {item: newList[index].item, quantity: value, category: newList[index].category}
-    setList(newList)
-    }
 
   function handleDragEnd(result) {
     setDragging(false)
@@ -108,6 +84,31 @@ function App() {
       return
     }
   }
+
+  function checkIfSaved(groceryItem, category){
+      // Check if item is added to savedGroceries
+      if(!savedGroceries.some(e => e.item === groceryItem)) { 
+        setSavedGroceries(prevSavedGroceries => [{item: groceryItem, category: category}, ...prevSavedGroceries])
+      } else {
+        // if the input is already in the saved groceries, move it to the top
+        const index = savedGroceries.findIndex(e => e.item === groceryItem)
+        const newSavedGroceries = savedGroceries
+        newSavedGroceries.splice(index, 1)
+        setSavedGroceries([{item: groceryItem, category: category}, ...newSavedGroceries])
+      }    
+  }
+
+  function handleQuantity(index, value, list, setList) {
+    if(value <= 0){
+      handleDelete(index, list, setList)  
+      return
+    }
+    const newList = [...list]
+    newList[index] = {item: newList[index].item, quantity: value, category: newList[index].category}
+    setList(newList)
+    }
+
+
 
   function moveItem(fromIndex, toIndex, fromList, toList, setFromList, setToList) {
     if(!setToList){

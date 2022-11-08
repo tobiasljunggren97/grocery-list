@@ -4,12 +4,12 @@ import './DropDownList.css'
 
 export const DropDownList = forwardRef((props,ref) => {
     const {savedGroceries, setSavedGroceries, newItem, handleSubmit, groceryList, checkedList} = props
-    const filterItems = savedGroceries.filter(savedGrocery => savedGrocery.toLowerCase().includes(newItem.toLowerCase())).map(
-      (savedGrocery, index) => dropDownDiv(savedGrocery, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
+    const filterItems = savedGroceries.filter(savedGrocery => savedGrocery.item.toLowerCase().includes(newItem.toLowerCase())).map(
+      (savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
     return (
       <div className="dropdown" ref={ref}>
         <div className="dropdown-content">
-          {newItem.length < 1 ? savedGroceries.map((savedGrocery, index) => dropDownDiv(savedGrocery, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
+          {newItem.length < 1 ? savedGroceries.map((savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
           : <span>{filterItems.length > 0 ? filterItems : dropDownDiv(newItem.charAt(0).toUpperCase() + newItem.slice(1).toLowerCase(), 999, setSavedGroceries, groceryList, checkedList, handleSubmit)}</span>
             }
           </div>

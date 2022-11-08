@@ -21,7 +21,7 @@ export default function CheckedListItems(props) {
         <div>
           <button onClick={() => handleQuantity(index, checkedList[index].quantity - 1, checkedList, setCheckedList)}>-</button>
           <input type="text" className="list-quantity-input" onChange={e => handleQuantity(index, e.target.value.match(new RegExp(/[^0-9]/, 'g')) ?  e.target.value : checkedList[index].quantity)} value={checkedList[index].quantity}></input>
-          <button onClick={() => handleQuantity(index, checkedList[index].quantity + 1, checkedList, setCheckedList)}>+</button>
+          <button onClick={() => handleQuantity(index, checkedList[index].quantity - (-1), checkedList, setCheckedList)}>+</button>
         </div>
         <span className="list-item-menu-dots"><BsThreeDotsVertical /></span>
       </div>

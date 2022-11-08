@@ -10,6 +10,8 @@
     overflow-y: scroll;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+
   
   }
   
@@ -45,14 +47,14 @@
   .dropdown-item-onlist-text {
     position: absolute;
     font-size: 0.7rem;
-    right: 12rem;
+    right: 11.9rem;
     bottom: 0.1rem;
   }
   
   .dropdown-item-checked-text {
     position: absolute;
     font-size: 0.7rem;
-    right: 12.5rem;
+    right: 12.4rem;
     bottom: 0.1rem;
   }
   
