@@ -51,10 +51,70 @@
   .list-item-category {
     position: absolute;
     z-index: 0;
+    padding: 0;
+    margin: 0;
+    width: fit-content;
     font-size: 0.7rem;
     top: 0rem;
     left: 0.15rem;
   }
+
+  .list-item-category-form {
+    border: none;
+    font-size: 0.7rem;
+    position: absolute;
+    z-index: 1;
+    top: -0.35rem;
+    left: -0.3rem;
+    margin: 0;
+  }
+  
+  .list-item-category-form > input[type="text"] {
+    font-size: 0.7rem;
+    margin: 0;
+    padding: 0;
+    background: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    text-indent: 7px;
+
+  }
+
+  .list-item-category-form > input[type="text"]:focus, .list-item-category-form > input[type="text"]:focus:hover {
+    background-color: white;
+    cursor: text;
+    text-decoration: none;
+
+
+  }
+
+  .list-item-category-form > input[type="text"]:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+
+
+  
+  .list-item-category-form > input {
+    max-width: 100px;
+    margin: 0;
+    color: var(--text-color);
+    border:0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .list-item-category-button {
+    display: inline;
+    position: absolute;
+    font-size: 0.7rem;
+    left: 6.5rem;
+    bottom: -1.7rem;
+  }
+
 
   .checkbox{
     display: flex;

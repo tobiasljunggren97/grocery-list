@@ -12,10 +12,10 @@ function App() {
   const [savedGroceries, setSavedGroceries] = useState(JSON.parse(localStorage.getItem('savedGroceries')) || [])
   const [checkedList, setCheckedList] = useState(JSON.parse(localStorage.getItem('checkedList')) || [])
   const firstCategory = "Uncategorized"
-  const [categories, setCategories] = useState(JSON.parse(localStorage.getItem('categories')) || [firstCategory])
   const [displayAutoComplete, setDisplayAutoComplete] = useState(false)
   const [newItem, setNewItem] = useState('')
   const [dragging, setDragging] = useState(false)
+  const [categoryChange, setCategoryChange] = useState({isChanging: false, index: null, value: ""})
   const wrapperRef = useRef();
 
   useEffect(() => {
@@ -34,7 +34,8 @@ function App() {
     // if the input is empty, do nothing
     if(itemToAdd !== '') {
       const capitalizedItem = itemToAdd.charAt(0).toUpperCase() + itemToAdd.slice(1).toLowerCase()
-      checkIfSaved(capitalizedItem, firstCategory)
+      //Set category to first category if it is empty, and sort dropdownlist (savedGroceries) so that new item appears first
+      const category = checkIfSaved(capitalizedItem, firstCategory)
       // if the input is not already in the grocery list, add it
       if(groceryList.some(e => e.item === capitalizedItem)) {
         //Item already exists, put it on top
@@ -54,8 +55,7 @@ function App() {
         quantity = checkedList[index].quantity
         handleDelete(index, checkedList, setCheckedList)
       }
-
-      const newGroceryList = [...groceryList, {item: capitalizedItem, quantity: quantity || 1, category: firstCategory}]
+      const newGroceryList = [...groceryList, {item: capitalizedItem, quantity: quantity || 1, category: category}]
       setGroceryList(newGroceryList)
       setNewItem('')
     }
@@ -89,12 +89,15 @@ function App() {
       // Check if item is added to savedGroceries
       if(!savedGroceries.some(e => e.item === groceryItem)) { 
         setSavedGroceries(prevSavedGroceries => [{item: groceryItem, category: category}, ...prevSavedGroceries])
+        return category
       } else {
         // if the input is already in the saved groceries, move it to the top
         const index = savedGroceries.findIndex(e => e.item === groceryItem)
         const newSavedGroceries = savedGroceries
+        const savedItem = newSavedGroceries[index]
         newSavedGroceries.splice(index, 1)
-        setSavedGroceries([{item: groceryItem, category: category}, ...newSavedGroceries])
+        setSavedGroceries([{item: savedItem.item, category: savedItem.category}, ...newSavedGroceries])
+        return savedItem.category
       }    
   }
 
@@ -107,6 +110,20 @@ function App() {
     newList[index] = {item: newList[index].item, quantity: value, category: newList[index].category}
     setList(newList)
     }
+
+  function handleCategoryChange(index, newCategory, list, setList) {
+    console.log("new category", newCategory)
+    const newList = [...list]
+    newList[index] = {item: newList[index].item, quantity: newList[index].quantity, category: newCategory}
+    setList(newList)
+    setSavedGroceries(prevSavedGroceries => {
+      const i = prevSavedGroceries.findIndex(e => e.item === newList[index].item)
+      const newSavedGroceries = prevSavedGroceries
+      newSavedGroceries[i] = {item: newList[index].item, category: newCategory}
+      return newSavedGroceries
+    })
+    setCategoryChange({isChanging: false, index: null, value: ""})
+  }
 
 
 
@@ -169,7 +186,10 @@ function App() {
                     setCheckedList={setCheckedList}
                     handleQuantity={handleQuantity}
                     moveItem={moveItem}
-                    draggable={draggable}  
+                    draggable={draggable}
+                    categoryChange={categoryChange}
+                    setCategoryChange={setCategoryChange}
+                    handleCategoryChange={handleCategoryChange}  
         />, "groceryList", "uncategorized-list-items")}
         </div>
         <div className="list-items">

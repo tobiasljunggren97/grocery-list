@@ -1,22 +1,25 @@
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
-import {useState} from 'react'
 import "./ListItems.css"
 
 
 export default function ListItems(props) {
-    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable} = props
+    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange} = props
     return (
      list.map((grocery, index) => {
       return (
         <div>
-          {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList), index, grocery.item, "list-item")}
+          {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange), index, grocery.item, "list-item")}
         </div>
       )
     }))
   }
 
-  function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList) {
+  function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, 
+                    categoryChange, setCategoryChange, handleCategoryChange) {
+    const {isChanging, value} = categoryChange
+    const changeIndex = categoryChange.index
+
     function quantityOnChange(e) {
       const re = /^[0-9\b]+$/;
       if (e.target.value === '' || re.test(e.target.value)) {
@@ -24,11 +27,35 @@ export default function ListItems(props) {
       }
     }
 
+    function categoryNameOnChange(e) {
+      setCategoryChange(prevCategoryChange => {
+        return {
+          ...prevCategoryChange,
+          value: e.target.value
+        }
+      })
+    }
+
+    function categoryNameChangeSubmit(e) {
+      e.preventDefault()
+      handleCategoryChange(changeIndex, value, list, setList)
+    }
+
     return (
       <>
       {/* <div className='list-item-category'>{list[index].category !== "Uncategorized" ? list[index].category: null}</div> */}
-      <div className='list-item-category'>{list[index].category}</div>
-
+      <form className="list-item-category-form" onSubmit={categoryNameChangeSubmit}>
+        <input className='list-item-category' 
+          type="text" 
+          onChange={categoryNameOnChange} 
+          value={isChanging && changeIndex === index ? value : list[index].category} 
+          onFocus={() => setCategoryChange(prevCategoryChange => {
+            console.log(`focusing on ${list[index].item}`)
+            return {...prevCategoryChange, isChanging: true, index: index, value: list[index].category}
+          })}
+        />
+        <button className="list-item-category-button">Submit</button>
+      </form>
       <div className="checkbox" type="checkbox" onClick={() => moveItem(index, 0, list, checkedList, setList, setCheckedList)}><MdOutlineCheckBoxOutlineBlank/></div>
       <span className="list-item-text">{list[index].item}</span>
       <div className="list-item-right-div">
