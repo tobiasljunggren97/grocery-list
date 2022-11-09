@@ -129,18 +129,23 @@ function App() {
 
   function moveItem(fromIndex, toIndex, fromList, toList, setFromList, setToList, changeCategory) {
     function findCategory(){
+      //Dont change category
       if((fromIndex === toIndex && toList === null) || !changeCategory){ 
         return fromList[fromIndex].category
       }
+      //Change category
       if(toList === null || toList.length === 0 ){
+        if(fromIndex > toIndex){
+          return fromList[toIndex-1].category
+        }
         return fromList[toIndex].category
       }
       if(toIndex === 0) return toList[0].category
-      return toList[toIndex].category
+      return toList[toIndex-1].category
     }
 
     const categoryToChangeTo = findCategory()
-    
+
     if(categoryToChangeTo !== fromList[fromIndex].category) {
       setSavedGroceries(prevSavedGroceries => {
         const i = prevSavedGroceries.findIndex(e => e.item === fromList[fromIndex].item)

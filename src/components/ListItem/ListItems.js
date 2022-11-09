@@ -20,7 +20,27 @@ export default function ListItems(props) {
       return sortedList
     }
 
+    function splitListsIntoCategories(list)
+    {
+      const categories = []
+      let category = []
+      for (let i = 0; i < list.length; i++) {
+        if (i === 0 || list[i].category !== list[i - 1].category) {
+          if (category.length !== 0) {
+            categories.push(category)
+          }
+          category = []
+        }
+        category.push(list[i])
+      }
+      categories.push(category)
+      return categories
+    }
+
+    
+
     const sortedList = listSortedByCategory()
+    const categories = splitListsIntoCategories(sortedList)
 
     return (
      sortedList.map((grocery, index) => {
@@ -29,7 +49,8 @@ export default function ListItems(props) {
           {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange), index, grocery.item, "list-item")}
         </div>
       )
-    }))
+    })
+    )
   }
 
   function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, 
