@@ -22,7 +22,7 @@ export default function CheckedListItems(props) {
 
     return (
       <>
-        <div className="checkbox" type="checkbox" onClick={() => moveItem(index, groceryList.length, checkedList, groceryList, setCheckedList, setGroceryList)}><MdOutlineCheckBox  /></div>
+        <div className="checkbox" type="checkbox" onClick={() => moveItem(index, groceryList.length, checkedList, groceryList, setCheckedList, setGroceryList, false)}><MdOutlineCheckBox  /></div>
       <span className="list-item-text"><s>{checkedList[index].item}</s></span>
       <div className="list-item-right-div">
         <div>

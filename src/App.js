@@ -67,20 +67,20 @@ function App() {
     if(result.destination.droppableId === result.source.droppableId && result.destination.index === result.source.index) return
     if(result.destination.droppableId === result.source.droppableId){
       if(result.destination.droppableId === 'groceryList'){
-        moveItem(result.source.index, result.destination.index, groceryList, null, setGroceryList, null)
+        moveItem(result.source.index, result.destination.index, groceryList, null, setGroceryList, null, true)
         return
       }
       if(result.destination.droppableId === 'checkedList'){
-        moveItem(result.source.index, result.destination.index, checkedList, null, setCheckedList, null)
+        moveItem(result.source.index, result.destination.index, checkedList, null, setCheckedList, null, false)
         return
       }
     }
     if(result.destination.droppableId === 'checkedList'){
-      moveItem(result.source.index, result.destination.index, groceryList, checkedList, setGroceryList, setCheckedList)
+      moveItem(result.source.index, result.destination.index, groceryList, checkedList, setGroceryList, setCheckedList, false)
       return
     }
     if(result.destination.droppableId === 'groceryList'){
-      moveItem(result.source.index, result.destination.index, checkedList, groceryList, setCheckedList, setGroceryList)
+      moveItem(result.source.index, result.destination.index, checkedList, groceryList, setCheckedList, setGroceryList, true)
       return
     }
   }
@@ -127,10 +127,34 @@ function App() {
 
 
 
-  function moveItem(fromIndex, toIndex, fromList, toList, setFromList, setToList) {
+  function moveItem(fromIndex, toIndex, fromList, toList, setFromList, setToList, changeCategory) {
+    function findCategory(){
+      if((fromIndex === toIndex && toList === null) || !changeCategory){ 
+        return fromList[fromIndex].category
+      }
+      if(toList === null || toList.length === 0 ){
+        return fromList[toIndex].category
+      }
+      if(toIndex === 0) return toList[0].category
+      return toList[toIndex].category
+    }
+
+    const categoryToChangeTo = findCategory()
+    
+    if(categoryToChangeTo !== fromList[fromIndex].category) {
+      setSavedGroceries(prevSavedGroceries => {
+        const i = prevSavedGroceries.findIndex(e => e.item === fromList[fromIndex].item)
+        const newSavedGroceries = prevSavedGroceries
+        newSavedGroceries[i] = {item: fromList[fromIndex].item, category: categoryToChangeTo}
+        return newSavedGroceries
+      })
+    }
+
+
     if(!setToList){
       const items = Array.from(fromList)
       const [reorderedItem] = items.splice(fromIndex, 1)
+      reorderedItem.category = categoryToChangeTo
       items.splice(toIndex, 0, reorderedItem)
       setFromList(items)
       return
@@ -138,6 +162,7 @@ function App() {
     const newFromList = [...fromList]
     const newToList = [...toList]
     const [reorderedItem] = newFromList.splice(fromIndex, 1)
+    reorderedItem.category = categoryToChangeTo
     newToList.splice(toIndex, 0, reorderedItem)
     setFromList(newFromList)
     setToList(newToList)

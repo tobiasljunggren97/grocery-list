@@ -108,7 +108,7 @@
   }
 
   .list-item-category-button {
-    display: inline;
+    display: none;
     position: absolute;
     font-size: 0.7rem;
     left: 6.5rem;
