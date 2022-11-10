@@ -1,15 +1,21 @@
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import {MdOutlineCheckBox} from 'react-icons/md'
 import "./ListItems.css"
+import {droppable} from '../../scripts/dnd'
 
 
 export default function CheckedListItems(props) {
     const {checkedList, setCheckedList, moveItem, handleQuantity, groceryList, setGroceryList, draggable} = props
-    return checkedList.map((check, index) => {
+    return <div className="list-items">
+      {checkedList.length > 0 ? 
+        <div className="checked-title"><span className="line-4"/><button onClick={() => setCheckedList([])}>Clear</button><span className="line-5"/><h4>Checked Off</h4><span className="line-3"/></div>
+        : null
+      }
+      {droppable(checkedList.map((check, index) => {
       return (
         draggable(CheckedItem(index, checkedList, setCheckedList, moveItem, handleQuantity, groceryList, setGroceryList), index, check.item, "list-item")
       )
-    })
+    }), "checkedList", "checked-list-items")}</div>
   }
 
   const CheckedItem = (index, checkedList, setCheckedList, moveItem, handleQuantity, groceryList, setGroceryList) => {

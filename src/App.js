@@ -170,8 +170,7 @@ function App() {
         return newSavedGroceries
       })
     }
-
-
+    
     if(!setToList){
       const items = Array.from(fromList)
       const [reorderedItem] = items.splice(fromIndex, 1)
@@ -223,9 +222,8 @@ function App() {
       />: null}
       </div>
       <DragDropContext onDragEnd={handleDragEnd} onDragStart={() => setDragging(true)}>
-        <div className="list-items">
         {/* {droppable(<p>Drop here to add category</p>, "setCategory", "set-category")} */}
-        {droppable(<ListItems 
+        <ListItems 
                     list={groceryList} 
                     setList={setGroceryList}
                     checkedList={checkedList}
@@ -236,14 +234,8 @@ function App() {
                     categoryChange={categoryChange}
                     setCategoryChange={setCategoryChange}
                     handleCategoryChange={handleCategoryChange}  
-        />, "groceryList", "uncategorized-list-items")}
-        </div>
-        <div className="list-items">
-        {checkedList.length > 0 ? 
-          <div className="checked-title"><span className="line-4"/><button onClick={() => setCheckedList([])}>Clear</button><span className="line-5"/><h4>Checked Off</h4><span className="line-3"/></div>
-        : null
-        }
-        {droppable(<CheckedListItems
+        />
+        <CheckedListItems
                     checkedList={checkedList}
                     setCheckedList={setCheckedList}
                     moveItem={moveItem}
@@ -251,8 +243,7 @@ function App() {
                     groceryList={groceryList}
                     setGroceryList={setGroceryList}
                     draggable={draggable}
-        />, "checkedList", "checked-list-items")}
-        </div>
+        />
       </DragDropContext>
     </div>
   )

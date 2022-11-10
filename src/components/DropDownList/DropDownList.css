@@ -49,6 +49,7 @@
     font-size: 0.7rem;
     right: 11.9rem;
     bottom: 0.1rem;
+    color: rgb(80, 80, 80);
   }
   
   .dropdown-item-checked-text {
@@ -56,6 +57,8 @@
     font-size: 0.7rem;
     right: 12.4rem;
     bottom: 0.1rem;
+    color: rgb(80, 80, 80);
+
   }
   
   .dropdown-item:hover {

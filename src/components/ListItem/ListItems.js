@@ -1,6 +1,7 @@
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
 import "./ListItems.css"
+import {droppable} from '../../scripts/dnd'
 
 
 export default function ListItems(props) {
@@ -37,20 +38,19 @@ export default function ListItems(props) {
       return categories
     }
 
-    
-
     const sortedList = listSortedByCategory()
     const categories = splitListsIntoCategories(sortedList)
 
     return (
-    <div>
-    {sortedList.map((grocery, index) => {
+    <div className="list-items">
+    {droppable(
+    sortedList.map((grocery, index) => {
       return (
         <div>
           {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange), index, grocery.item, "list-item")}
         </div>
       )
-    })}
+    }), "groceryList", "uncategorized-list-items")}
     </div>
     )
   }
