@@ -43,18 +43,21 @@ export default function ListItems(props) {
     const categories = splitListsIntoCategories(sortedList)
 
     return (
-     sortedList.map((grocery, index) => {
+    <div>
+    {sortedList.map((grocery, index) => {
       return (
         <div>
           {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange), index, grocery.item, "list-item")}
         </div>
       )
-    })
+    })}
+    </div>
     )
   }
 
   function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, 
-                    categoryChange, setCategoryChange, handleCategoryChange) {
+                    categoryChange, setCategoryChange, handleCategoryChange) 
+  {
 
     const {isChanging, value} = categoryChange
     const changeIndex = categoryChange.index

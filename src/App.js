@@ -112,16 +112,32 @@ function App() {
     }
 
   function handleCategoryChange(index, newCategory, list, setList) {
-    console.log("new category", newCategory)
+    const oldCategory = list[index].category
+
     const newList = [...list]
-    newList[index] = {item: newList[index].item, quantity: newList[index].quantity, category: newCategory}
-    setList(newList)
-    setSavedGroceries(prevSavedGroceries => {
-      const i = prevSavedGroceries.findIndex(e => e.item === newList[index].item)
-      const newSavedGroceries = prevSavedGroceries
-      newSavedGroceries[i] = {item: newList[index].item, category: newCategory}
-      return newSavedGroceries
+    list.forEach((item, i) => {
+      if(item.category === oldCategory){
+        newList[i] = {item: newList[i].item, quantity: newList[i].quantity, category: newCategory}
+      }
     })
+
+    const newSavedGroceries = [...savedGroceries]
+    savedGroceries.forEach((item, i) => {
+      if(item.category === oldCategory){
+        newSavedGroceries[i] = {item: newSavedGroceries[i].item, category: newCategory}
+      }
+    })
+
+    const newCheckedList = [...checkedList]
+    checkedList.forEach((item, i) => {
+      if(item.category === oldCategory){
+        newCheckedList[i] = {item: newCheckedList[i].item, quantity: newCheckedList[i].quantity, category: newCategory}
+      }
+    })
+
+    setList(newList)
+    setSavedGroceries(newSavedGroceries)
+    setCheckedList(newCheckedList)
     setCategoryChange({isChanging: false, index: null, value: ""})
   }
 

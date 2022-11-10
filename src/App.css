@@ -8,6 +8,8 @@
   --background-gradient-end: rgb(61, 142, 45);
 }
 
+
+
 body {
   background: rgb(255,255,255);
   background: linear-gradient(180deg, var(--background-gradient-start) 92%, var(--background-gradient-end) 100%); 
