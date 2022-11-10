@@ -6,7 +6,7 @@
     align-content: center;
     justify-content: center;
     min-height: 2vh;
-    margin-block: 1vh;
+    margin-block: 1rem;
     background-color: var(--bg-color-secondary);
     border: 1px solid var(--border-color);
     padding-block: 1rem;
@@ -15,6 +15,7 @@
   }
 
   .list-item {
+    box-sizing: border-box;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -23,6 +24,7 @@
     border-bottom: 1px solid var(--border-color);
     padding-block: 0.8rem;
     margin-inline: 0.5rem;
+    margin-right: 0.2rem;
   }
   
   .list-item-text {
@@ -34,7 +36,7 @@
   .list-quantity-input {
     width: 1rem;
     text-align: center;
-    box-shadow: 1px 1px 1px var(--border-color);
+    box-shadow: 1px 1px 5px var(--border-color);
   }
   
   .list-item-menu-dots {
@@ -54,7 +56,7 @@
     z-index: 0;
     padding: 0;
     margin: 0;
-    width: fit-content;
+    width: max-content;
     font-size: 0.7rem;
     top: 0rem;
     left: 0.15rem;
@@ -80,7 +82,6 @@
     cursor: pointer;
     text-indent: 7px;
     font-weight: bold;
-
   }
 
   .list-item-category-form > input[type="text"]:focus, .list-item-category-form > input[type="text"]:focus:hover {
@@ -102,7 +103,7 @@
 
   
   .list-item-category-form > input {
-    max-width: 100px;
+    width: fit-content;
     margin: 0;
     color: var(--text-color);
     border:0;
@@ -111,13 +112,7 @@
     appearance: none;
   }
 
-  .list-item-category-button {
-    display: none;
-    position: absolute;
-    font-size: 0.7rem;
-    left: 6.5rem;
-    bottom: -1.7rem;
-  }
+
 
 
   .checkbox{
@@ -173,5 +168,46 @@
   .line-5 {
     width: 12%;
   }
-  
-  
+
+ .vertical-line {
+  position:absolute;
+  height: 71px;
+  margin-left: -4px;
+  bottom: -1px;
+  width: 1px;
+  background-color: var(--border-color);
+ }
+
+ .first-vertical-line {
+  position: absolute;
+  height: 56px;
+  bottom: -1px;
+  margin-left: -4px;
+  width: 1px;
+  background-color: var(--border-color);
+ }
+
+ .first-horizontal-line {
+  position: absolute;
+  border-top: 1px solid var(--border-color);
+  top: 0;
+  margin-top: 5px;
+  width: 4px;
+  margin-left: -4px;
+ }
+
+
+ .last-horizontal-line {
+  position: absolute;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: -1px;
+  bottom: 0;
+  width: 4px;
+  margin-left: -4px;
+  /* position: absolute;
+  height: 1px;
+  margin-top: 63px;
+  margin-left: -4px;
+  width: 5px;
+  background-color: var(--border-color); */
+ }

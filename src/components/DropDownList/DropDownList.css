@@ -5,12 +5,14 @@
     border: 1px solid var(--border-color);
     margin-right: 0rem;
     padding: 0;
-    top: 9.3rem;
+    top: 9.5rem;
     max-height: 60vh;
     overflow-y: scroll;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     border-top-right-radius: 7px;
+    box-shadow: 1px 1px 5px var(--border-color);
+
 
   
   }

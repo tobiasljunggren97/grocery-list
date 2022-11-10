@@ -1,11 +1,12 @@
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
 import "./ListItems.css"
+import CategoryLines from './CategoryLines'
 import {droppable} from '../../scripts/dnd'
 
 
 export default function ListItems(props) {
-    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange} = props
+    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange, dragging} = props
 
     function listSortedByCategory() {
       const sortedList = list.sort((a, b) => {
@@ -43,11 +44,12 @@ export default function ListItems(props) {
 
     return (
     <div className="list-items">
+      {/* <CategoryLines categories={categories}/> */}
     {droppable(
     sortedList.map((grocery, index) => {
       return (
         <div>
-          {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange), index, grocery.item, "list-item")}
+          {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging), index, grocery.item, "list-item")}
         </div>
       )
     }), "groceryList", "uncategorized-list-items")}
@@ -56,7 +58,7 @@ export default function ListItems(props) {
   }
 
   function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, 
-                    categoryChange, setCategoryChange, handleCategoryChange) 
+                    categoryChange, setCategoryChange, handleCategoryChange, dragging) 
   {
 
     const {isChanging, value} = categoryChange
@@ -84,11 +86,15 @@ export default function ListItems(props) {
     }
 
     const firstOfType = index === 0 || list[index].category !== list[index - 1].category
+    const lastOfType = index === list.length - 1 || list[index].category !== list[index + 1].category
 
     return (
       <>
       {/* <div className='list-item-category'>{list[index].category !== "Uncategorized" ? list[index].category: null}</div> */}
-      {firstOfType ? <form className="list-item-category-form" onSubmit={categoryNameChangeSubmit}>
+      {firstOfType ? <>
+      {!dragging ? <div className="first-vertical-line"></div> : null}
+      {!dragging ? <div className="first-horizontal-line"></div> : null}
+      <form className="list-item-category-form" onSubmit={categoryNameChangeSubmit}>
         <input className='list-item-category' 
           type="text" 
           onChange={categoryNameOnChange} 
@@ -97,8 +103,9 @@ export default function ListItems(props) {
             return {...prevCategoryChange, isChanging: true, index: index, value: list[index].category}
           })}
         />
-        <button className="list-item-category-button">Submit</button>
-      </form> : null}
+      </form>
+      </> : !dragging ? <div className="vertical-line"></div> : null}
+      {lastOfType ? !dragging ? <div className="last-horizontal-line"></div> : null : null}
       <div className="checkbox" type="checkbox" onClick={() => moveItem(index, 0, list, checkedList, setList, setCheckedList, false)}><MdOutlineCheckBoxOutlineBlank/></div>
       <span className="list-item-text">{list[index].item}</span>
       <div className="list-item-right-div">

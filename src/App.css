@@ -87,15 +87,6 @@ input[type="text"], textarea {
   margin: 0.5rem 0;
 }
 
-.set-category {
-  position: relative;
-  margin: 0;
-}
-
-.set-category > p {
-  font-size: 0.7rem;
-}
-
 button {
   background-color: var(--bg-color-secondary);
   color: var(--text-color);
@@ -110,6 +101,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+
 }
 
 .cross {
