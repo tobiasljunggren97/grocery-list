@@ -1,14 +1,26 @@
 :root {
-  --text-color: rgb(16, 15, 0);
+  /* --text-color: rgb(16, 15, 0);
   --bg-color-primary: #edf6ec;
   --bg-color-secondary: #e0f4df;
   --border-color: #8fc293;
   --button-color: rgb(166, 213, 162);
   --background-gradient-start: rgba(255,255,255,1);
   --background-gradient-end: rgb(61, 142, 45);
+  --checkbox-color: var(--button-color); 
+  --dropdown-tip-color: rgb(80, 80, 80);
+*/
+  --text-color: rgb(224, 224, 224);
+  --bg-color-primary: #319b33;
+  --bg-color-secondary: #1a1c1a;
+  --border-color: #000000;
+  --button-color: rgb(18, 18, 18);
+  --background-gradient-start: rgb(33, 33, 33);
+  --background-gradient-end: rgb(0, 0, 0);
+  --checkbox-color: #000000;
+  --dropdown-tip-color: rgb(105, 105, 105);
+  --cross-color: #000000;
+  --cross-color-hover: #319b33;
 }
-
-
 
 body {
   background: rgb(255,255,255);
@@ -17,9 +29,8 @@ body {
   min-height: 100vh;
   background-color: var(--bg-color-primary);
   color:var(--text-color);
-  max-width: 300px;
+  min-width: 100vw;
   margin: 0 auto;
-
 }
 
 .App {
@@ -28,14 +39,14 @@ body {
 
 .App > h3 { 
   margin-top: 0;
-  padding-block: 1rem;
+  padding-block: 0.3rem;
   padding-top: 2rem;
   color: var(--text-color);
   box-sizing: border-box;
-
 }
 
 form {
+  max-width: 300px;
   border-radius: 7px;
   background-color: var(--bg-color-secondary);
   border: 1px solid var(--border-color);
@@ -53,6 +64,7 @@ form > button {
 form > input[type="text"], textarea {
   font-size: 1.1rem;
   background-color : var(--bg-color-secondary);
+  color: var(--text-color);
   appearance: none;
   border: none
 }
@@ -107,7 +119,7 @@ button {
 .cross {
   cursor: pointer;
   font-size: 1rem;
-  color: var(--border-color);
+  color: var(--cross-color);
   padding-block: 0.2rem;
   margin-top: 0.3rem;
   padding-inline: 0;
@@ -115,7 +127,7 @@ button {
 }
 
 .cross:hover {
-  color: rgb(79, 79, 100);
+  color: var(--cross-color-hover);
   transition: color 100ms ease;
 }
 

@@ -1,9 +1,8 @@
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
 import "./ListItems.css"
-import CategoryLines from './CategoryLines'
 import {droppable} from '../../scripts/dnd'
-
+import {Draggable} from '@hello-pangea/dnd'
 
 export default function ListItems(props) {
     const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange, dragging} = props
@@ -22,34 +21,25 @@ export default function ListItems(props) {
       return sortedList
     }
 
-    function splitListsIntoCategories(list)
-    {
-      const categories = []
-      let category = []
-      for (let i = 0; i < list.length; i++) {
-        if (i === 0 || list[i].category !== list[i - 1].category) {
-          if (category.length !== 0) {
-            categories.push(category)
-          }
-          category = []
-        }
-        category.push(list[i])
-      }
-      categories.push(category)
-      return categories
-    }
-
-    const sortedList = listSortedByCategory()
-    const categories = splitListsIntoCategories(sortedList)
-
     return (
     <div className="list-items">
-      {/* <CategoryLines categories={categories}/> */}
     {droppable(
-    sortedList.map((grocery, index) => {
+    listSortedByCategory().map((grocery, index) => {
       return (
         <div>
-          {draggable(ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging), index, grocery.item, "list-item")}
+          <Draggable key={grocery.item} draggableId={grocery.item.toString()} index={index}>
+          {(provided) => (
+              <div 
+              key={grocery.item} 
+              className={"list-item"}
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              >
+                {ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging)}
+              </div>
+          )}
+          </Draggable>
         </div>
       )
     }), "groceryList", "uncategorized-list-items")}
@@ -57,13 +47,10 @@ export default function ListItems(props) {
     )
   }
 
-  function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, 
-                    categoryChange, setCategoryChange, handleCategoryChange, dragging) 
+  function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging) 
   {
-
     const {isChanging, value} = categoryChange
     const changeIndex = categoryChange.index
-
     function quantityOnChange(e) {
       const re = /^[0-9\b]+$/;
       if (e.target.value === '' || re.test(e.target.value)) {
@@ -90,7 +77,6 @@ export default function ListItems(props) {
 
     return (
       <>
-      {/* <div className='list-item-category'>{list[index].category !== "Uncategorized" ? list[index].category: null}</div> */}
       {firstOfType ? <>
       {!dragging ? <div className="first-vertical-line"></div> : null}
       {!dragging ? <div className="first-horizontal-line"></div> : null}
@@ -105,6 +91,7 @@ export default function ListItems(props) {
         />
       </form>
       </> : !dragging ? <div className="vertical-line"></div> : null}
+
       {lastOfType ? !dragging ? <div className="last-horizontal-line"></div> : null : null}
       <div className="checkbox" type="checkbox" onClick={() => moveItem(index, 0, list, checkedList, setList, setCheckedList, false)}><MdOutlineCheckBoxOutlineBlank/></div>
       <span className="list-item-text">{list[index].item}</span>
@@ -115,6 +102,7 @@ export default function ListItems(props) {
           <button onClick={() => handleQuantity(index, list[index].quantity - (-1), list, setList)}>+</button>
         </div>
         <span className="list-item-menu-dots"><BsThreeDotsVertical /></span>
+        
       </div>
 
     </>

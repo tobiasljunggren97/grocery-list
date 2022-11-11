@@ -147,16 +147,20 @@ function App() {
     function findCategory(){
       //Dont change category
       if((fromIndex === toIndex && toList === null) || !changeCategory){ 
+        console.log("Line 150")
         return fromList[fromIndex].category
       }
       //Change category
       if(toList === null || toList.length === 0 ){
         if(fromIndex > toIndex){
+          console.log("Line 156")
           return fromList[toIndex-1].category
         }
+        console.log("Line 159")
         return fromList[toIndex].category
       }
       if(toIndex === 0) return toList[0].category
+      console.log("Line 163")
       return toList[toIndex-1].category
     }
 

@@ -1,5 +1,6 @@
 
 .list-items {
+  width: 300px;
     border-radius: 7px;
     display: flex;
     flex-direction: column;
@@ -60,6 +61,7 @@
     font-size: 0.7rem;
     top: 0rem;
     left: 0.15rem;
+
   }
 
   .list-item-category-form {
@@ -82,6 +84,8 @@
     cursor: pointer;
     text-indent: 7px;
     font-weight: bold;
+    color: var(--text-color);
+
   }
 
   .list-item-category-form > input[type="text"]:focus, .list-item-category-form > input[type="text"]:focus:hover {
@@ -112,15 +116,13 @@
     appearance: none;
   }
 
-
-
-
   .checkbox{
     display: flex;
     align-items: center;
     cursor: pointer;
     font-size: 1.9rem;
-    color: var(--border-color);
+    margin-left: 0.5rem;
+    color: var(--checkbox-color);
   }
 
   .quantity {

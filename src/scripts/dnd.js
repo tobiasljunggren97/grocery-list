@@ -24,6 +24,7 @@ export function draggable(input, index, id, className){
           <div className={className} ref={provided.innerRef} {...provided.droppableProps}>
             {input}
             {provided.placeholder}
+            
           </div>
         )}
       </Droppable>

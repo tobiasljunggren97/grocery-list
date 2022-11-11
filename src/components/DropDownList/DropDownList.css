@@ -5,16 +5,13 @@
     border: 1px solid var(--border-color);
     margin-right: 0rem;
     padding: 0;
-    top: 9.5rem;
+    top: 8.7rem;
     max-height: 60vh;
     overflow-y: scroll;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     border-top-right-radius: 7px;
     box-shadow: 1px 1px 5px var(--border-color);
-
-
-  
   }
   
   .dropdown-content {
@@ -51,7 +48,7 @@
     font-size: 0.7rem;
     right: 11.9rem;
     bottom: 0.1rem;
-    color: rgb(80, 80, 80);
+    color: var(--dropdown-tip-color);
   }
   
   .dropdown-item-checked-text {
@@ -66,4 +63,7 @@
   .dropdown-item:hover {
     background-color: var(--button-color) ;
     transition: background-color 100ms ease;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+
   }
