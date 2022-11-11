@@ -3,9 +3,11 @@ import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
 import "./ListItems.css"
 import {droppable} from '../../scripts/dnd'
 import {Draggable} from '@hello-pangea/dnd'
+import MiniMenuDropDown from '../../components/MiniMenuDropDown/MiniMenuDropDown'
+
 
 export default function ListItems(props) {
-    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange, dragging} = props
+    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown} = props
 
     function listSortedByCategory() {
       const sortedList = list.sort((a, b) => {
@@ -36,7 +38,7 @@ export default function ListItems(props) {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               >
-                {ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging)}
+                {ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown)}
               </div>
           )}
           </Draggable>
@@ -47,7 +49,7 @@ export default function ListItems(props) {
     )
   }
 
-  function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging) 
+  function ListItem(index, list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown) 
   {
     const {isChanging, value} = categoryChange
     const changeIndex = categoryChange.index
@@ -101,9 +103,12 @@ export default function ListItems(props) {
           <input type="text" className="list-quantity-input" onChange={e => quantityOnChange(e)} value={list[index].quantity} onFocus={event => event.target.select()}></input>
           <button onClick={() => handleQuantity(index, list[index].quantity - (-1), list, setList)}>+</button>
         </div>
-        <span className="list-item-menu-dots"><BsThreeDotsVertical /></span>
-        
+
+        <span className="list-item-menu-dots" onClick={() => setMiniMenuDroppedDown(prevMiniMenuDropdown => !prevMiniMenuDropdown.droppedDown || prevMiniMenuDropdown.index !== index ? {droppedDown: true, index: index, list: "groceryList"} : {droppedDown: false, index: null, list: "groceryList"})}>
+          <BsThreeDotsVertical />
+        </span>
       </div>
+      {miniMenuDroppedDown.droppedDown && index === miniMenuDroppedDown.index ? <MiniMenuDropDown/> : null}
 
     </>
     )

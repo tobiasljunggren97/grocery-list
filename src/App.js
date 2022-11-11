@@ -16,7 +16,10 @@ function App() {
   const [newItem, setNewItem] = useState('')
   const [dragging, setDragging] = useState(false)
   const [categoryChange, setCategoryChange] = useState({isChanging: false, index: null, value: ""})
+  const [miniMenuDroppedDown, setMiniMenuDroppedDown] = useState({droppedDown: false, index: null, list: "groceryList"})
   const wrapperRef = useRef();
+
+  console.log(miniMenuDroppedDown)
 
   useEffect(() => {
     localStorage.setItem('groceryList', JSON.stringify(groceryList))
@@ -147,20 +150,16 @@ function App() {
     function findCategory(){
       //Dont change category
       if((fromIndex === toIndex && toList === null) || !changeCategory){ 
-        console.log("Line 150")
         return fromList[fromIndex].category
       }
       //Change category
       if(toList === null || toList.length === 0 ){
         if(fromIndex > toIndex){
-          console.log("Line 156")
           return fromList[toIndex-1].category
         }
-        console.log("Line 159")
         return fromList[toIndex].category
       }
       if(toIndex === 0) return toList[0].category
-      console.log("Line 163")
       return toList[toIndex-1].category
     }
 
@@ -238,6 +237,8 @@ function App() {
                     setCategoryChange={setCategoryChange}
                     handleCategoryChange={handleCategoryChange} 
                     dragging={dragging} 
+                    miniMenuDroppedDown={miniMenuDroppedDown}
+                    setMiniMenuDroppedDown={setMiniMenuDroppedDown}
       />
       <CheckedListItems
                     checkedList={checkedList}
