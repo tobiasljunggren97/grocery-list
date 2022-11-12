@@ -6,6 +6,7 @@
     margin-right: 0rem;
     padding: 0;
     top: 8.7rem;
+    width: 350px;
     max-height: 60vh;
     overflow-y: scroll;
     border-bottom-left-radius: 7px;
@@ -24,7 +25,6 @@
   .dropdown-item {
     margin: 0;
     margin-bottom: 0.2rem;
-    width: 15.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,7 +46,6 @@
   .dropdown-item-onlist-text {
     position: absolute;
     font-size: 0.7rem;
-    right: 11.9rem;
     bottom: 0.1rem;
     color: var(--dropdown-tip-color);
   }
@@ -54,7 +53,6 @@
   .dropdown-item-checked-text {
     position: absolute;
     font-size: 0.7rem;
-    right: 12.4rem;
     bottom: 0.1rem;
     color: var(--dropdown-tip-color);
 

@@ -1,6 +1,6 @@
 
 .list-items {
-  width: 300px;
+    width: 350px;
     border-radius: 7px;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     align-items:center;
     margin: 0.5rem 0;
     border-bottom: 1px solid var(--border-color);
-    padding-block: 0.8rem;
+    padding-block: 1rem;
     margin-inline: 0.5rem;
   }
   
@@ -124,7 +124,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: 1.9rem;
+    font-size: 2.2rem;
     margin-left: 0.5rem;
     color: var(--checkbox-color);
   }
@@ -177,7 +177,7 @@
 
  .vertical-line {
   position:absolute;
-  height: 71px;
+  height: 77px;
   margin-left: -4px;
   bottom: -1px;
   width: 1px;
@@ -186,7 +186,7 @@
 
  .first-vertical-line {
   position: absolute;
-  height: 56px;
+  height: 63px;
   bottom: -1px;
   margin-left: -4px;
   width: 1px;

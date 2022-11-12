@@ -56,7 +56,7 @@ body {
 }
 
 form {
-  max-width: 300px;
+  max-width: 350px;
   border-radius: 7px;
   background-color: var(--bg-color-secondary);
   border: 1px solid var(--border-color);

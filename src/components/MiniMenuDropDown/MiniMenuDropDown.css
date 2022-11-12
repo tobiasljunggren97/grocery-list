@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0.5rem;
+    margin-block: 0.7rem;
     padding-inline: 1rem;
     text-align: center;
     position: relative;
@@ -34,7 +34,7 @@
   }
 
   .mini-menu-dropdown-cross {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-right: 0.5rem;
     margin-left: 0.1rem;
   }
