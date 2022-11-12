@@ -6,6 +6,9 @@ import {handleDelete} from './scripts/handleLists'
 import ListItems from './components/ListItem/ListItems'
 import CheckedListItems from './components/ListItem/CheckedListItems'
 import {DropDownList} from './components/DropDownList/DropDownList'
+import MiniMenuDropDown from './components/MiniMenuDropDown/MiniMenuDropDown'
+import { BsFileEasel } from 'react-icons/bs'
+
 
 function App() {
   const [groceryList, setGroceryList] = useState(JSON.parse(localStorage.getItem('groceryList')) || [])
@@ -205,6 +208,15 @@ function App() {
     }
   }
 
+  function checkOffItem(index) {
+    moveItem(index, 0, groceryList, checkedList, setGroceryList, setCheckedList, false)
+  }
+
+  function uncheckItem(index){
+    moveItem(index, groceryList.length, checkedList, groceryList, setCheckedList, setGroceryList, false)
+  }
+
+
   return (
     <div className="App">
       <h3>My Groceries</h3>
@@ -250,6 +262,16 @@ function App() {
                     draggable={draggable}
       />
       </DragDropContext>
+      {miniMenuDroppedDown.droppedDown ? 
+      <MiniMenuDropDown 
+            groceryList={groceryList} 
+            setGroceryList={setGroceryList} 
+            miniMenuDroppedDown={miniMenuDroppedDown}
+            setMiniMenuDroppedDown={setMiniMenuDroppedDown} 
+            checkOffItem={checkOffItem} 
+            uncheckItem={uncheckItem} 
+            savedGroceries={savedGroceries}
+            setSavedGroceries={setSavedGroceries}/> : null}
     </div>
   )
 }

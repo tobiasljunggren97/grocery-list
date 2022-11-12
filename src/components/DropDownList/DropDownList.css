@@ -56,7 +56,7 @@
     font-size: 0.7rem;
     right: 12.4rem;
     bottom: 0.1rem;
-    color: rgb(80, 80, 80);
+    color: var(--dropdown-tip-color);
 
   }
   

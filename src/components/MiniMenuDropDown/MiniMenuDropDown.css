@@ -1,10 +1,14 @@
 .mini-menu-dropdown {
-    position: absolute;
+    position: fixed;
     list-style: none;
     background-color: var(--bg-color-secondary);
-    right: 1rem;
     padding-block: 1rem;
-    top: calc(50% - 1rem);
+    width: 95vw;
+    max-width: 400px;
+    bottom: 20px;
+    margin: 0;
+    left: 50%;
+    transform: translate(-50%);
     z-index: 5;
     border: 1px solid var(--border-color);
     border-radius: 7px;
@@ -15,13 +19,29 @@
    .mini-menu-dropdown-item {
     margin: 0;
     display: flex;
-    font-size: 0.8rem;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0.3rem;
-    padding-inline: 0.8rem;
+    margin-block: 0.5rem;
+    padding-inline: 1rem;
     text-align: center;
     position: relative;
+    width: fit-content;
+    padding-inline: 1rem;
+  }
+
+  .mini-menu-dropdown-arrow {
+    margin-right: 0.3rem;
+  }
+
+  .mini-menu-dropdown-cross {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-left: 0.1rem;
+  }
+
+  .mini-menu-dropdown-checkbox {
+    margin-right: 0.3rem;
+    margin-left: 0;
   }
 
   .mini-menu-dropdown-item:hover {

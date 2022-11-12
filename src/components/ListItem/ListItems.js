@@ -3,7 +3,6 @@ import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
 import "./ListItems.css"
 import {droppable} from '../../scripts/dnd'
 import {Draggable} from '@hello-pangea/dnd'
-import MiniMenuDropDown from '../../components/MiniMenuDropDown/MiniMenuDropDown'
 
 
 export default function ListItems(props) {
@@ -77,6 +76,10 @@ export default function ListItems(props) {
     const firstOfType = index === 0 || list[index].category !== list[index - 1].category
     const lastOfType = index === list.length - 1 || list[index].category !== list[index + 1].category
 
+    function checkOffItem() {
+      moveItem(index, 0, list, checkedList, setList, setCheckedList, false)
+    }
+
     return (
       <>
       {firstOfType ? <>
@@ -95,7 +98,7 @@ export default function ListItems(props) {
       </> : !dragging ? <div className="vertical-line"></div> : null}
 
       {lastOfType ? !dragging ? <div className="last-horizontal-line"></div> : null : null}
-      <div className="checkbox" type="checkbox" onClick={() => moveItem(index, 0, list, checkedList, setList, setCheckedList, false)}><MdOutlineCheckBoxOutlineBlank/></div>
+      <div className="checkbox" type="checkbox" onClick={checkOffItem}><MdOutlineCheckBoxOutlineBlank/></div>
       <span className="list-item-text">{list[index].item}</span>
       <div className="list-item-right-div">
         <div>
@@ -108,7 +111,7 @@ export default function ListItems(props) {
           <BsThreeDotsVertical />
         </span>
       </div>
-      {miniMenuDroppedDown.droppedDown && index === miniMenuDroppedDown.index ? <MiniMenuDropDown/> : null}
+
 
     </>
     )
