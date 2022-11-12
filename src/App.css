@@ -1,4 +1,9 @@
 :root {
+  /* For mobile */
+  touch-action: pan-x pan-y;
+  height: 100%;
+
+
   /* --text-color: rgb(16, 15, 0);
   --bg-color-primary: #edf6ec;
   --bg-color-secondary: #e0f4df;
