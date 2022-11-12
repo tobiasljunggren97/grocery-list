@@ -46,6 +46,10 @@
     margin-bottom: 0;
     cursor: pointer;
   }
+
+  .list-item-menu-dots:hover {
+    color: gray;
+  }
   
   .list-item-right-div {
     display: flex;

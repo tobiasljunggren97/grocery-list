@@ -99,12 +99,16 @@ export default function MiniMenuDropDown(props) {
                     categories.push(item.category)
                 }
             })
+            if(!categories.includes("Uncategorized")){
+                categories.push("Uncategorized")
+            }
             categories.sort()
             return categories
         }
 
         return (
         <div className="mini-menu-dropdown">
+            <div>{groceryList[miniMenuDroppedDown.index].item}</div>
             {categories().map(category => <div className="mini-menu-dropdown-item" onClick={() => handleItemCategoryChange(category)}>{category}</div>)}
             <div className="mini-menu-dropdown-item" onClick={() => handleItemCategoryChange(null)}>..New category</div>
             <div className="mini-menu-dropdown-item" onClick={handleCategories}><BiRightArrow className="mini-menu-dropdown-arrow"/>Back</div>

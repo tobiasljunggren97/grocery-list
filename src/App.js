@@ -1,13 +1,12 @@
 import './App.css'
 import {useState, useEffect, useRef, React } from 'react'
 import {DragDropContext} from '@hello-pangea/dnd'
-import {draggable, droppable} from './scripts/dnd'
+import {draggable} from './scripts/dnd'
 import {handleDelete} from './scripts/handleLists'
 import ListItems from './components/ListItem/ListItems'
 import CheckedListItems from './components/ListItem/CheckedListItems'
 import {DropDownList} from './components/DropDownList/DropDownList'
 import MiniMenuDropDown from './components/MiniMenuDropDown/MiniMenuDropDown'
-import { BsFileEasel } from 'react-icons/bs'
 
 
 function App() {
@@ -222,7 +221,11 @@ function App() {
       <h3>My Groceries</h3>
       <div className="input-form">
       <form onSubmit={handleSubmit}>
-        <input className="grocery-input" type="text" placeholder="Add an item..." value={newItem} onChange={event => {setDisplayAutoComplete(true); return setNewItem(event.target.value)}} onClick={() => setDisplayAutoComplete(prev => !prev)} />
+        <input className="grocery-input" type="text" placeholder="Add an item..." value={newItem} onChange={event => {setDisplayAutoComplete(true); return setNewItem(event.target.value)}} onClick={() => {
+        setDisplayAutoComplete(prev => !prev)
+        setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}
+        
+        } />
         <button type="submit">+</button>
       </form>
       {displayAutoComplete && (newItem.length > 0 || savedGroceries.length > 0) ? 
@@ -238,30 +241,30 @@ function App() {
       </div>
       <DragDropContext onDragEnd={handleDragEnd} onDragStart={() => setDragging(true)}>
       <ListItems 
-                    list={groceryList} 
-                    setList={setGroceryList}
-                    checkedList={checkedList}
-                    setCheckedList={setCheckedList}
-                    handleQuantity={handleQuantity}
-                    moveItem={moveItem}
-                    draggable={draggable}
-                    categoryChange={categoryChange}
-                    setCategoryChange={setCategoryChange}
-                    handleCategoryChange={handleCategoryChange} 
-                    dragging={dragging} 
-                    miniMenuDroppedDown={miniMenuDroppedDown}
-                    setMiniMenuDroppedDown={setMiniMenuDroppedDown}
+            list={groceryList} 
+            setList={setGroceryList}
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+            handleQuantity={handleQuantity}
+            moveItem={moveItem}
+            draggable={draggable}
+            categoryChange={categoryChange}
+            setCategoryChange={setCategoryChange}
+            handleCategoryChange={handleCategoryChange} 
+            dragging={dragging} 
+            miniMenuDroppedDown={miniMenuDroppedDown}
+            setMiniMenuDroppedDown={setMiniMenuDroppedDown}                   
       />
       <CheckedListItems
-                    checkedList={checkedList}
-                    setCheckedList={setCheckedList}
-                    moveItem={moveItem}
-                    handleQuantity={handleQuantity}
-                    groceryList={groceryList}
-                    setGroceryList={setGroceryList}
-                    draggable={draggable}
-                    miniMenuDroppedDown={miniMenuDroppedDown}
-                    setMiniMenuDroppedDown={setMiniMenuDroppedDown}
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
+            moveItem={moveItem}
+            handleQuantity={handleQuantity}
+            groceryList={groceryList}
+            setGroceryList={setGroceryList}
+            draggable={draggable}
+            miniMenuDroppedDown={miniMenuDroppedDown}
+            setMiniMenuDroppedDown={setMiniMenuDroppedDown}
       />
       </DragDropContext>
       {miniMenuDroppedDown.droppedDown ? 

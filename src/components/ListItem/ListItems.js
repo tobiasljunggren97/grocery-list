@@ -6,7 +6,7 @@ import {Draggable} from '@hello-pangea/dnd'
 
 
 export default function ListItems(props) {
-    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, draggable, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown} = props
+    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown} = props
 
     function listSortedByCategory() {
       const sortedList = list.sort((a, b) => {
