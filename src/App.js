@@ -224,8 +224,7 @@ function App() {
         <input className="grocery-input" type="text" placeholder="Add an item..." value={newItem} onChange={event => {setDisplayAutoComplete(true); return setNewItem(event.target.value)}} onClick={() => {
         setDisplayAutoComplete(prev => !prev)
         setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}
-        
-        } />
+        } onBlur={() => setDisplayAutoComplete(false)} />
         <button type="submit">+</button>
       </form>
       {displayAutoComplete && (newItem.length > 0 || savedGroceries.length > 0) ? 
