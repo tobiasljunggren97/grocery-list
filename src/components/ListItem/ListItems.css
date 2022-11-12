@@ -1,6 +1,6 @@
 
 .list-items {
-    width: 300px;
+  width: 300px;
     border-radius: 7px;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,6 @@
     border-bottom: 1px solid var(--border-color);
     padding-block: 0.8rem;
     margin-inline: 0.5rem;
-    margin-right: 0.2rem;
   }
   
   .list-item-text {
