@@ -260,12 +260,16 @@ function App() {
                     groceryList={groceryList}
                     setGroceryList={setGroceryList}
                     draggable={draggable}
+                    miniMenuDroppedDown={miniMenuDroppedDown}
+                    setMiniMenuDroppedDown={setMiniMenuDroppedDown}
       />
       </DragDropContext>
       {miniMenuDroppedDown.droppedDown ? 
       <MiniMenuDropDown 
             groceryList={groceryList} 
             setGroceryList={setGroceryList} 
+            checkedList={checkedList}
+            setCheckedList={setCheckedList}
             miniMenuDroppedDown={miniMenuDroppedDown}
             setMiniMenuDroppedDown={setMiniMenuDroppedDown} 
             checkOffItem={checkOffItem} 
