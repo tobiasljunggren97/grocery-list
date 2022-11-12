@@ -21,8 +21,6 @@ function App() {
   const [miniMenuDroppedDown, setMiniMenuDroppedDown] = useState({droppedDown: false, index: null, list: "groceryList"})
   const wrapperRef = useRef();
 
-  console.log(miniMenuDroppedDown)
-
   useEffect(() => {
     localStorage.setItem('groceryList', JSON.stringify(groceryList))
     localStorage.setItem('checkedList', JSON.stringify(checkedList))

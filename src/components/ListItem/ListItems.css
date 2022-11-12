@@ -1,6 +1,6 @@
 
 .list-items {
-  width: 300px;
+    width: 300px;
     border-radius: 7px;
     display: flex;
     flex-direction: column;

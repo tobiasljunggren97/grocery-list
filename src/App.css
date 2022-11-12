@@ -27,6 +27,12 @@
   --cross-color-hover: #319b33;
 }
 
+html, body {
+  position:relative;
+  /*overflow:hidden;*/
+  height: 100%;
+}
+
 body {
   background: rgb(255,255,255);
   background: linear-gradient(180deg, var(--background-gradient-start) 92%, var(--background-gradient-end) 100%); 
@@ -35,7 +41,6 @@ body {
   background-color: var(--bg-color-primary);
   color:var(--text-color);
   min-width: 100vw;
-  margin: 0 auto;
 }
 
 .App {
