@@ -195,8 +195,10 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("touchstart", handleClickOutside);
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("touchstart", handleClickOutside);
     }
   })
 
