@@ -14,7 +14,7 @@ function App() {
   const [savedGroceries, setSavedGroceries] = useState(JSON.parse(localStorage.getItem('savedGroceries')) || [])
   const [checkedList, setCheckedList] = useState(JSON.parse(localStorage.getItem('checkedList')) || [])
   const firstCategory = "Uncategorized"
-  const [displayAutoComplete, setDisplayAutoComplete] = useState(false)
+  const [displayAddItems, setDisplayAddItems] = useState(false)
   const [newItem, setNewItem] = useState('')
   const [dragging, setDragging] = useState(false)
   const [categoryChange, setCategoryChange] = useState({isChanging: false, index: null, value: ""})
@@ -29,7 +29,7 @@ function App() {
   
 
   function handleSubmit(event, item) {
-    setDisplayAutoComplete(false)
+    setDisplayAddItems(false)
     const itemToAdd = item || newItem
     if(event !== null){
       event.preventDefault()
@@ -191,21 +191,21 @@ function App() {
     setToList(newToList)
   }
 
-  useEffect(() => {
-    window.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("touchstart", handleClickOutside);
-    return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("touchstart", handleClickOutside);
-    }
-  })
+  // useEffect(() => {
+  //   window.addEventListener("mousedown", handleClickOutside);
+  //   window.addEventListener("touchstart", handleClickOutside);
+  //   return () => {
+  //     window.removeEventListener("mousedown", handleClickOutside);
+  //     window.removeEventListener("touchstart", handleClickOutside);
+  //   }
+  // })
 
-  const handleClickOutside = event => {
-    const { current: wrap } = wrapperRef;
-    if (wrap && !wrap.contains(event.target)) {
-      setDisplayAutoComplete(false);
-    }
-  }
+  // const handleClickOutside = event => {
+  //   const { current: wrap } = wrapperRef;
+  //   if (wrap && !wrap.contains(event.target)) {
+  //     setDisplayAddItems(false);
+  //   }
+  // }
 
   function checkOffItem(index) {
     moveItem(index, 0, groceryList, checkedList, setGroceryList, setCheckedList, false)
@@ -220,23 +220,25 @@ function App() {
     <div className="App">
       <h3>My Groceries</h3>
       <div className="input-form">
-      <form onSubmit={handleSubmit}>
-        <input className="grocery-input" type="text" placeholder="Add an item..." value={newItem} onChange={event => {setDisplayAutoComplete(true); return setNewItem(event.target.value)}} onClick={() => {
-        setDisplayAutoComplete(prev => !prev)
-        setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}
-        } onBlur={() => setDisplayAutoComplete(false)} />
-        <button type="submit">+</button>
-      </form>
-      {displayAutoComplete && (newItem.length > 0 || savedGroceries.length > 0) ? 
+
+      {displayAddItems ? 
+      <div>
+
       <DropDownList
         savedGroceries={savedGroceries}
         setSavedGroceries={setSavedGroceries}
         newItem={newItem}
+        setNewItem={setNewItem}
         handleSubmit={handleSubmit}
         groceryList={groceryList}
         checkedList={checkedList}
         ref={wrapperRef}
-      />: null}
+        displayAddItems={displayAddItems}
+        setDisplayAddItems={setDisplayAddItems}
+        setMiniMenuDroppedDown={setMiniMenuDroppedDown}
+      />
+      </div>
+      : null}
       </div>
       <DragDropContext onDragEnd={handleDragEnd} onDragStart={() => setDragging(true)}>
       <ListItems 
@@ -277,7 +279,8 @@ function App() {
             checkOffItem={checkOffItem} 
             uncheckItem={uncheckItem} 
             savedGroceries={savedGroceries}
-            setSavedGroceries={setSavedGroceries}/> : null}
+            setSavedGroceries={setSavedGroceries}/> : <button className="add-item-button" onClick={() => setDisplayAddItems(prevDisplayAddItems => !prevDisplayAddItems)}>+</button>
+          }
     </div>
   )
 }

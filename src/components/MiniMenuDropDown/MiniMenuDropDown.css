@@ -6,6 +6,7 @@
     width: 95vw;
     max-width: 400px;
     bottom: 20px;
+    z-index: 5;
     margin: 0;
     left: 50%;
     transform: translate(-50%);
@@ -21,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0.7rem;
+    margin-block: 1rem;
     padding-inline: 1rem;
     text-align: center;
     position: relative;
@@ -43,8 +44,8 @@
     margin-right: 0.3rem;
     margin-left: 0;
   }
-
+/* 
   .mini-menu-dropdown-item:hover {
     color: gray;
 
-  }
+  } */

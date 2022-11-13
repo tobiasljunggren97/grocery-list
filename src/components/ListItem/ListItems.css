@@ -13,6 +13,11 @@
     padding-block: 1rem;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0px 1px 5px 5px rgb(238, 238, 238);
+  }
+
+  .checked-list-container {
+    margin-bottom:100px;
   }
 
   .list-item {
@@ -34,6 +39,9 @@
   }
   
   .list-quantity-input {
+    font-size: 0.8rem;
+    padding-block: 0.3rem;
+    padding-inline: 0.3rem;
     width: 1rem;
     text-align: center;
     box-shadow: 1px 1px 5px var(--border-color);
@@ -44,15 +52,23 @@
     align-items: center;
     margin-bottom: 0;
     cursor: pointer;
+    font-size: 1.2rem;
   }
 
-  .list-item-menu-dots:hover {
+  /* .list-item-menu-dots:hover {
     color: gray;
-  }
+  } */
   
   .list-item-right-div {
     display: flex;
     align-items: center;
+  }
+
+  .list-item-right-div button {
+    padding: 0.5rem;
+    padding-inline: 0.75rem;
+    margin-block: 0;
+    font-weight: bold;
   }
   
   .list-item-category {
@@ -91,21 +107,18 @@
 
   }
 
-  .list-item-category-form > input[type="text"]:focus, .list-item-category-form > input[type="text"]:focus:hover {
+  /* .list-item-category-form > input[type="text"]:focus, .list-item-category-form > input[type="text"]:focus:hover {
     background-color: white;
     cursor: text;
     text-decoration: none;
     font-weight: normal;
     color: black;
-
-
-
   }
 
   .list-item-category-form > input[type="text"]:hover {
     cursor: pointer;
     text-decoration: underline;
-  }
+  } */
 
 
 
@@ -147,6 +160,14 @@
     margin-inline: 1rem;
     white-space: nowrap;
   }
+
+  .clear-button {
+    margin-inline: 0.5rem;
+    cursor: pointer;
+    padding-block: 0.4rem;
+    padding-inline: 0.9rem;
+    font-size: 0.8rem;
+  }
   
   .line-1, .line-2, .line-3, .line-4, .line-5 {
     border-top: 1px solid var(--border-color);
@@ -168,16 +189,16 @@
   }
   
   .line-4 {
-    width: 12%;
+    width: 15%;
   }
   
   .line-5 {
-    width: 12%;
+    width: 15%;
   }
 
  .vertical-line {
   position:absolute;
-  height: 77px;
+  height: 114%;
   margin-left: -4px;
   bottom: -1px;
   width: 1px;
@@ -186,11 +207,12 @@
 
  .first-vertical-line {
   position: absolute;
-  height: 63px;
+  height: 93%;
   bottom: -1px;
   margin-left: -4px;
   width: 1px;
   background-color: var(--border-color);
+
  }
 
  .first-horizontal-line {

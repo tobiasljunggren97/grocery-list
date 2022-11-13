@@ -90,9 +90,11 @@ export default function ListItems(props) {
           type="text" 
           onChange={categoryNameOnChange} 
           value={isChanging && changeIndex === index ? value : list[index].category} 
-          onFocus={() => setCategoryChange(prevCategoryChange => {
+          onFocus={event => {
+            event.target.select()
+            setCategoryChange(prevCategoryChange => {
             return {...prevCategoryChange, isChanging: true, index: index, value: list[index].category}
-          })}
+          })}}
         />
       </form>
       </> : !dragging ? <div className="vertical-line"></div> : null}

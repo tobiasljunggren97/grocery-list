@@ -4,17 +4,21 @@
   height: 100%;
 
 
-  /* --text-color: rgb(16, 15, 0);
+  --text-color: rgb(16, 15, 0);
   --bg-color-primary: #edf6ec;
-  --bg-color-secondary: #e0f4df;
-  --border-color: #8fc293;
-  --button-color: rgb(166, 213, 162);
-  --background-gradient-start: rgba(255,255,255,1);
+  --bg-color-secondary: #ffffff;
+  --border-color: #a7d2aa;
+  --button-color: rgb(117, 207, 109);
+  --background-gradient-start: rgb(255, 255, 255);
   --background-gradient-end: rgb(61, 142, 45);
   --checkbox-color: var(--button-color); 
   --dropdown-tip-color: rgb(80, 80, 80);
-*/
-  --text-color: rgb(224, 224, 224);
+  --cross-color: var(--button-color);
+  --checkbox-color: rgb(192, 219, 193);
+
+
+
+  /* --text-color: rgb(224, 224, 224);
   --bg-color-primary: #319b33;
   --bg-color-secondary: #1a1c1a;
   --border-color: #000000;
@@ -24,7 +28,7 @@
   --checkbox-color: #000000;
   --dropdown-tip-color: rgb(105, 105, 105);
   --cross-color: #000000;
-  --cross-color-hover: #319b33;
+  --cross-color-hover: #319b33; */
 }
 
 html, body {
@@ -56,14 +60,10 @@ body {
 }
 
 form {
-  max-width: 350px;
   border-radius: 7px;
   background-color: var(--bg-color-secondary);
-  border: 1px solid var(--border-color);
   box-sizing: border-box;
-  align-items: center;
   display: flex;
-  width: 100%;
 }
 
 form > button {
@@ -72,6 +72,7 @@ form > button {
 }
 
 form > input[type="text"], textarea {
+  text-align: left;
   font-size: 1.1rem;
   background-color : var(--bg-color-secondary);
   color: var(--text-color);
@@ -80,7 +81,6 @@ form > input[type="text"], textarea {
 }
 
 form > input {
-  max-width: 300px;
   width: 100%;
   padding: 1rem;
   margin: 0;
@@ -92,7 +92,10 @@ form > input {
 }
 
 input[type="text"], textarea {
-  background-color : var(--bg-color-primary);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color : white;
   min-height: 1.5rem;
   min-width: 1.5rem;
 
@@ -102,10 +105,13 @@ input[type="text"], textarea {
 
 
 .input-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: fixed;
+  top:0;
+  background-color: var(--bg-color-secondary);
+  z-index: 5;
+  width: 350px;
+  left: 50%;
+  transform: translate(-50%, 0);
   margin: 0.5rem 0;
 }
 
@@ -118,8 +124,10 @@ button {
   background-color: var(--button-color);
   box-shadow: 1px 1px 1px var(--border-color);
   border: none;
+  
   padding: 0.3rem 0.6rem;
   margin: 0.3rem;
+  margin-inline: 0.4rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -135,9 +143,24 @@ button {
   padding-inline: 0;
   border-radius: 5px;
 }
-
+/* 
 .cross:hover {
   color: var(--cross-color-hover);
   transition: color 100ms ease;
-}
+} */
 
+
+.add-item-button{
+  position: fixed;
+  z-index: 10;
+  bottom: 1rem;
+  padding: 1.2rem 1.7rem;
+  border-radius: 50px;
+  margin-inline: auto;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 1.5rem;
+  background-color: var(--button-color);
+  border: none;
+  color: var(--text-color);
+}

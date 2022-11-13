@@ -3,15 +3,34 @@ import {ImCross} from 'react-icons/im'
 import './DropDownList.css'
 
 export const DropDownList = forwardRef((props,ref) => {
-    const {savedGroceries, setSavedGroceries, newItem, handleSubmit, groceryList, checkedList} = props
+    const {savedGroceries, setSavedGroceries, newItem, handleSubmit, groceryList, checkedList, setDisplayAddItems, setNewItem, setMiniMenuDroppedDown} = props
+
     const filterItems = savedGroceries.filter(savedGrocery => savedGrocery.item.toLowerCase().includes(newItem.toLowerCase())).map(
       (savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
+
+
+
+
     return (
       <div className="dropdown" ref={ref}>
         <div className="dropdown-content">
+        <form onSubmit={handleSubmit} className="dropdown-form">
+        <input className="dropdown-item" type="text" placeholder="Add an item..." value={newItem} 
+        onChange={event => {setDisplayAddItems(true); return setNewItem(event.target.value)}} 
+        onClick={() => {
+        // setDisplayAddItems(prev => !prev)
+        setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}} 
+        // onBlur={() => setDisplayAddItems(false)} 
+        autoFocus
+        
+        />
+        {/* <button type="submit">+</button> */}
+        </form>
+        <div className="dropdown-items">
           {newItem.length < 1 ? savedGroceries.map((savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
           : <span>{filterItems.length > 0 ? filterItems : dropDownDiv(newItem.charAt(0).toUpperCase() + newItem.slice(1).toLowerCase(), 999, setSavedGroceries, groceryList, checkedList, handleSubmit)}</span>
             }
+          </div>
           </div>
       </div>
     )
