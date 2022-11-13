@@ -1,6 +1,5 @@
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import {MdOutlineCheckBoxOutlineBlank} from 'react-icons/md'
-import {ImPlus, ImMinus} from 'react-icons/im'
 import "./ListItems.css"
 import {droppable} from '../../scripts/dnd'
 import {Draggable} from '@hello-pangea/dnd'
