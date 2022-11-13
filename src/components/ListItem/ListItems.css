@@ -69,7 +69,9 @@
     padding-inline: 0.75rem;
     margin-block: 0;
     font-weight: bold;
+    box-shadow: 1px 1px 5px var(--border-color);
   }
+
   
   .list-item-category {
     position: absolute;
@@ -103,7 +105,7 @@
     cursor: pointer;
     text-indent: 7px;
     font-weight: bold;
-    color: var(--text-color);
+    color: rgb(63, 130, 56)
 
   }
 

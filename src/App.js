@@ -7,6 +7,8 @@ import ListItems from './components/ListItem/ListItems'
 import CheckedListItems from './components/ListItem/CheckedListItems'
 import {DropDownList} from './components/DropDownList/DropDownList'
 import MiniMenuDropDown from './components/MiniMenuDropDown/MiniMenuDropDown'
+import {BiUpArrow} from 'react-icons/bi'
+
 
 
 function App() {
@@ -279,7 +281,7 @@ function App() {
             checkOffItem={checkOffItem} 
             uncheckItem={uncheckItem} 
             savedGroceries={savedGroceries}
-            setSavedGroceries={setSavedGroceries}/> : <button className="add-item-button" onClick={() => setDisplayAddItems(prevDisplayAddItems => !prevDisplayAddItems)}>+</button>
+            setSavedGroceries={setSavedGroceries}/> : <button className="add-item-button" onClick={() => setDisplayAddItems(prevDisplayAddItems => !prevDisplayAddItems)}>{displayAddItems ? <BiUpArrow className='add-item-button-arrow'/> : "+"}</button>
           }
     </div>
   )

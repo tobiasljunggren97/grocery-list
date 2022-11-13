@@ -163,4 +163,11 @@ button {
   background-color: var(--button-color);
   border: none;
   color: var(--text-color);
+  box-shadow: none;
+}
+
+.add-item-button-arrow {
+  transform: rotate(180deg);
+  font-size: 0.9rem;
+  margin-inline: 0;
 }

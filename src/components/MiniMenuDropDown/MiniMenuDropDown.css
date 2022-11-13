@@ -31,6 +31,7 @@
   }
 
   .mini-menu-dropdown-arrow {
+    font-size: 1.2rem;
     margin-right: 0.3rem;
   }
 
@@ -41,6 +42,7 @@
   }
 
   .mini-menu-dropdown-checkbox {
+    font-size: 1.4rem;
     margin-right: 0.3rem;
     margin-left: 0;
   }

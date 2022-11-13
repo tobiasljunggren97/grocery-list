@@ -1,14 +1,14 @@
 .dropdown{
-    position: absolute;
+    position: fixed;
     z-index: 5;
     background-color: var(--bg-color-secondary);
     border: 1px solid var(--border-color);
     margin-right: 0rem;
     padding: 0;
-    top: -8px;
+    top: 50px;
     width: 100vw;
     max-width: 500px;
-    max-height: 100vh;
+    max-height: 41vh;
     overflow-y: scroll;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -22,18 +22,29 @@
   .dropdown-content {
     gap: 1rem;
     padding: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
   }
 
   .dropdown-form {
     position: fixed;
-    width: 95%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 1px solid var(--border-color);
+    box-shadow: 1px 1px 5px var(--border-color);
+    width: 98vw;
+    max-width: 500px;
+
+    border-radius: 0;
+    top: 0;
+    z-index: 10;
+    width: 500;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 
   .dropdown-items {
     position: relative;
-    top: 3rem;
   }
   
   .dropdown-item {

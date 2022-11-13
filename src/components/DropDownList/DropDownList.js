@@ -12,26 +12,27 @@ export const DropDownList = forwardRef((props,ref) => {
 
 
     return (
-      <div className="dropdown" ref={ref}>
-        <div className="dropdown-content">
+      <div>
         <form onSubmit={handleSubmit} className="dropdown-form">
         <input className="dropdown-item" type="text" placeholder="Add an item..." value={newItem} 
         onChange={event => {setDisplayAddItems(true); return setNewItem(event.target.value)}} 
         onClick={() => {
-        // setDisplayAddItems(prev => !prev)
         setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}} 
-        // onBlur={() => setDisplayAddItems(false)} 
         autoFocus
         
         />
-        {/* <button type="submit">+</button> */}
         </form>
+        {filterItems.length > 0 || newItem.length > 0 ?
+      <div className="dropdown" ref={ref}>
+        <div className="dropdown-content">
         <div className="dropdown-items">
           {newItem.length < 1 ? savedGroceries.map((savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
           : <span>{filterItems.length > 0 ? filterItems : dropDownDiv(newItem.charAt(0).toUpperCase() + newItem.slice(1).toLowerCase(), 999, setSavedGroceries, groceryList, checkedList, handleSubmit)}</span>
             }
           </div>
           </div>
+      </div> : null}
+      
       </div>
     )
   }
