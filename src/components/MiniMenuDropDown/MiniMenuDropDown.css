@@ -33,18 +33,23 @@
   .mini-menu-dropdown-arrow {
     font-size: 1.2rem;
     margin-right: 0.3rem;
+    color: var(--button-color);
   }
 
   .mini-menu-dropdown-cross {
     font-size: 1rem;
     margin-right: 0.5rem;
     margin-left: 0.1rem;
+    color: var(--button-color);
+
   }
 
   .mini-menu-dropdown-checkbox {
     font-size: 1.4rem;
     margin-right: 0.3rem;
     margin-left: 0;
+    color: var(--button-color);
+
   }
 /* 
   .mini-menu-dropdown-item:hover {

@@ -72,8 +72,8 @@ export default function MiniMenuDropDown(props) {
         return (
             <div className="mini-menu-dropdown">
             <div>{groceryList[miniMenuDroppedDown.index].item}</div>
-            <div className="mini-menu-dropdown-item" onClick={handleCheck}><MdOutlineCheckBox className="mini-menu-dropdown-checkbox"/> Check off item</div>
             <div className="mini-menu-dropdown-item" onClick={() => handleRemove(setGroceryList)}><ImCross className="mini-menu-dropdown-cross"/> Remove item</div>
+            <div className="mini-menu-dropdown-item" onClick={handleCheck}><MdOutlineCheckBox className="mini-menu-dropdown-checkbox"/> Check off item</div>
             <div className="mini-menu-dropdown-item" onClick={handleCategories}><BiUpArrow className="mini-menu-dropdown-arrow"/>Add to category</div>
             <div className="mini-menu-dropdown-item" onClick={() => setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}>Close</div>
         </div>
@@ -84,8 +84,9 @@ export default function MiniMenuDropDown(props) {
         return (
             <div className="mini-menu-dropdown">
             <div><s>{checkedList[miniMenuDroppedDown.index].item}</s></div>
-            <div className="mini-menu-dropdown-item" onClick={handleUncheck}><MdOutlineCheckBox className="mini-menu-dropdown-checkbox"/> Uncheck item</div>
             <div className="mini-menu-dropdown-item" onClick={() => handleRemove(setCheckedList)}><ImCross className="mini-menu-dropdown-cross"/> Clear item</div>
+            <div className="mini-menu-dropdown-item" onClick={handleUncheck}><MdOutlineCheckBox className="mini-menu-dropdown-checkbox"/> Uncheck item</div>
+
             <div className="mini-menu-dropdown-item" onClick={() => setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}>Close</div>
         </div>
         )
@@ -99,8 +100,8 @@ export default function MiniMenuDropDown(props) {
                     categories.push(item.category)
                 }
             })
-            if(!categories.includes("Uncategorized")){
-                categories.push("Uncategorized")
+            if(categories.includes("Uncategorized")){
+                categories.splice(categories.indexOf("Uncategorized"), 1)
             }
             categories.sort()
             return categories

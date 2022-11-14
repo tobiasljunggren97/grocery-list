@@ -9,7 +9,7 @@ export default function CheckedListItems(props) {
     return <div className="checked-list-container"><div className="list-items">
       {checkedList.length > 0 ? 
         <div className="checked-title"><span className="line-4"/><button className="clear-button" onClick={() => setCheckedList([])}>Clear</button><span className="line-5"/><h4>Checked Off</h4><span className="line-3"/></div>
-        : null
+        : <div className="list-item-hint"><i>Check or drop an item here to check off...</i></div>
       }
       {droppable(checkedList.map((check, index) => {
       return (

@@ -6,7 +6,7 @@
     margin-right: 0rem;
     padding: 0;
     top: 50px;
-    width: 100vw;
+    width: 98vw;
     max-width: 500px;
     max-height: 41vh;
     overflow-y: scroll;
@@ -15,7 +15,19 @@
     box-shadow: 1px 1px 5px var(--border-color);
     left: 50%;
     transform: translate(-50%, 0);
+    animation-name: slide-down;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1; 
   }
+
+@keyframes slide-down {
+  0% {
+    transform: translate(-50%, -100%);
+  }
+  100% {
+    transform: translateY(-50%, 0);
+  }
+}
 
 
   

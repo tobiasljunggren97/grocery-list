@@ -6,7 +6,7 @@ import {Draggable} from '@hello-pangea/dnd'
 
 
 export default function ListItems(props) {
-    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown} = props
+    const {list, setList, moveItem, handleQuantity, checkedList, setCheckedList, categoryChange, setCategoryChange, handleCategoryChange, dragging, miniMenuDroppedDown, setMiniMenuDroppedDown, setDisplayAddItems, setUsedListToAdd} = props
 
     function listSortedByCategory() {
       const sortedList = list.sort((a, b) => {
@@ -24,7 +24,7 @@ export default function ListItems(props) {
 
     return (
     <div className="list-items">
-    {droppable(
+    {list.length > 0 || checkedList.length > 0 ? droppable(
     listSortedByCategory().map((grocery, index) => {
       return (
         <div>
@@ -43,7 +43,8 @@ export default function ListItems(props) {
           </Draggable>
         </div>
       )
-    }), "groceryList", "uncategorized-list-items")}
+    }), "groceryList", "uncategorized-list-items") : checkedList.length > 0 ? <div></div> :<div className="add-item-hint" onClick={() => {setUsedListToAdd({bool: true, firstTime: true}); setDisplayAddItems(true)}}><i>All empty, add an item...</i></div>}
+    {/* {list.length > 0 ? <div className="list-item" onClick={() => setDisplayAddItems(true)}><div className="add-item-hint"><i >Add an item...</i></div></div> : null} */}
     </div>
     )
   }
@@ -89,6 +90,7 @@ export default function ListItems(props) {
         <input className='list-item-category' 
           type="text" 
           onChange={categoryNameOnChange} 
+          onBlur={categoryNameChangeSubmit}
           value={isChanging && changeIndex === index ? value : list[index].category} 
           onFocus={event => {
             event.target.select()

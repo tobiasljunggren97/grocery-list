@@ -9,21 +9,20 @@ export const DropDownList = forwardRef((props,ref) => {
       (savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))
 
 
-
+      
 
     return (
-      <div>
+      <div ref={ref}>
         <form onSubmit={handleSubmit} className="dropdown-form">
         <input className="dropdown-item" type="text" placeholder="Add an item..." value={newItem} 
         onChange={event => {setDisplayAddItems(true); return setNewItem(event.target.value)}} 
         onClick={() => {
         setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"})}} 
         autoFocus
-        
-        />
+      />
         </form>
         {filterItems.length > 0 || newItem.length > 0 ?
-      <div className="dropdown" ref={ref}>
+      <div className="dropdown">
         <div className="dropdown-content">
         <div className="dropdown-items">
           {newItem.length < 1 ? savedGroceries.map((savedGrocery, index) => dropDownDiv(savedGrocery.item, index, setSavedGroceries, groceryList, checkedList, handleSubmit))

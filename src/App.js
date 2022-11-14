@@ -7,7 +7,7 @@ import ListItems from './components/ListItem/ListItems'
 import CheckedListItems from './components/ListItem/CheckedListItems'
 import {DropDownList} from './components/DropDownList/DropDownList'
 import MiniMenuDropDown from './components/MiniMenuDropDown/MiniMenuDropDown'
-import {BiUpArrow} from 'react-icons/bi'
+import {FaArrowDown} from 'react-icons/fa'
 
 
 
@@ -21,6 +21,7 @@ function App() {
   const [dragging, setDragging] = useState(false)
   const [categoryChange, setCategoryChange] = useState({isChanging: false, index: null, value: ""})
   const [miniMenuDroppedDown, setMiniMenuDroppedDown] = useState({droppedDown: false, index: null, list: "groceryList"})
+  const [usedListToAdd, setUsedListToAdd] = useState({bool: false, firstTime: false})
   const wrapperRef = useRef();
 
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
   
 
   function handleSubmit(event, item) {
+
     setDisplayAddItems(false)
     const itemToAdd = item || newItem
     if(event !== null){
@@ -149,6 +151,14 @@ function App() {
 
 
   function moveItem(fromIndex, toIndex, fromList, toList, setFromList, setToList, changeCategory) {
+    //Tooltip for when user tries to add to empty list
+    if(usedListToAdd.bool){
+      if(usedListToAdd.firstTime){
+        setUsedListToAdd({bool: true, firstTime: false})
+      } else {
+        setUsedListToAdd({bool: false, firstTime: false})
+      }
+    }    
     function findCategory(){
       //Dont change category
       if((fromIndex === toIndex && toList === null) || !changeCategory){ 
@@ -192,22 +202,23 @@ function App() {
     setFromList(newFromList)
     setToList(newToList)
   }
+  
 
-  // useEffect(() => {
-  //   window.addEventListener("mousedown", handleClickOutside);
-  //   window.addEventListener("touchstart", handleClickOutside);
-  //   return () => {
-  //     window.removeEventListener("mousedown", handleClickOutside);
-  //     window.removeEventListener("touchstart", handleClickOutside);
-  //   }
-  // })
+  useEffect(() => {
+    window.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("touchstart", handleClickOutside);
+    }
+  })
 
-  // const handleClickOutside = event => {
-  //   const { current: wrap } = wrapperRef;
-  //   if (wrap && !wrap.contains(event.target)) {
-  //     setDisplayAddItems(false);
-  //   }
-  // }
+  const handleClickOutside = event => {
+    const { current: wrap } = wrapperRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setDisplayAddItems(false);
+    }
+  }
 
   function checkOffItem(index) {
     moveItem(index, 0, groceryList, checkedList, setGroceryList, setCheckedList, false)
@@ -256,8 +267,11 @@ function App() {
             handleCategoryChange={handleCategoryChange} 
             dragging={dragging} 
             miniMenuDroppedDown={miniMenuDroppedDown}
-            setMiniMenuDroppedDown={setMiniMenuDroppedDown}                   
+            setMiniMenuDroppedDown={setMiniMenuDroppedDown} 
+            setDisplayAddItems={setDisplayAddItems} 
+            setUsedListToAdd={setUsedListToAdd}              
       />
+      {groceryList.length > 0 || checkedList.length > 0 ?
       <CheckedListItems
             checkedList={checkedList}
             setCheckedList={setCheckedList}
@@ -268,7 +282,7 @@ function App() {
             draggable={draggable}
             miniMenuDroppedDown={miniMenuDroppedDown}
             setMiniMenuDroppedDown={setMiniMenuDroppedDown}
-      />
+      /> : null}
       </DragDropContext>
       {miniMenuDroppedDown.droppedDown ? 
       <MiniMenuDropDown 
@@ -281,7 +295,14 @@ function App() {
             checkOffItem={checkOffItem} 
             uncheckItem={uncheckItem} 
             savedGroceries={savedGroceries}
-            setSavedGroceries={setSavedGroceries}/> : <button className="add-item-button" onClick={() => setDisplayAddItems(prevDisplayAddItems => !prevDisplayAddItems)}>{displayAddItems ? <BiUpArrow className='add-item-button-arrow'/> : "+"}</button>
+            setSavedGroceries={setSavedGroceries}/> : 
+            !displayAddItems ? <button 
+            className="add-item-button" 
+            onClick={() => setDisplayAddItems(prevDisplayAddItems => !prevDisplayAddItems)}>
+              {groceryList.length === 1 && checkedList.length < 1 && usedListToAdd.bool ? <><div className="add-item-tooltip">Click here to add more items</div><FaArrowDown className="add-item-tooltip-arrow"/></> : null}
+            
+            +
+            </button> : null
           }
     </div>
   )
