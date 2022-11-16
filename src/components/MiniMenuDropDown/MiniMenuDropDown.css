@@ -5,7 +5,7 @@
     padding-block: 1rem;
     width: 95vw;
     max-width: 400px;
-    bottom: 0rem;
+    bottom: 1rem;
     z-index: 5;
     margin: 0;
     left: 50%;
@@ -15,7 +15,17 @@
     border-radius: 7px;
     box-shadow: 1px 1px 5px var(--border-color);
     cursor: pointer;
+    max-height: 90vh;
+
    }
+
+
+  .mini-menu-categories-list {
+    border-bottom: 1px solid var(--border-color);
+    overflow-y: scroll;
+    max-height: 50vh;
+
+  }
 
 
    .mini-menu-dropdown-item {
