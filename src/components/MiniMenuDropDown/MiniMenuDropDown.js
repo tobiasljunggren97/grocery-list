@@ -1,10 +1,11 @@
 import "./MiniMenuDropDown.css";
+import { forwardRef } from 'react'
 import {ImCross} from 'react-icons/im'
 import {MdOutlineCheckBox} from 'react-icons/md'
 import {BiRightArrow, BiUpArrow} from 'react-icons/bi'
 
 
-export default function MiniMenuDropDown(props) {
+export const MiniMenuDropDown = forwardRef((props,ref) => {
     const {groceryList, setGroceryList, checkedList, setCheckedList, miniMenuDroppedDown, setMiniMenuDroppedDown, checkOffItem, uncheckItem, savedGroceries, setSavedGroceries} = props
 
 
@@ -129,6 +130,7 @@ export default function MiniMenuDropDown(props) {
     }
 
     return (
-       <MiniMenu />
+       <div ref={ref}><MiniMenu /></div>
     )
 }
+)

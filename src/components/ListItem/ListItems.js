@@ -100,9 +100,24 @@ export default function ListItems(props) {
         />
       </form>
       </> : !dragging ? <div className="vertical-line"></div> : null}
-
       {lastOfType ? !dragging ? <div className="last-horizontal-line"></div> : null : null}
-      <div className="checkbox" type="checkbox" onClick={checkOffItem}><MdOutlineCheckBoxOutlineBlank/></div>
+      
+      {  firstOfType ?    
+      <><div className="checkbox-first-of-type" type="checkbox" onClick={checkOffItem}><MdOutlineCheckBoxOutlineBlank/></div>
+      <span className="list-item-text-first-of-type">{list[index].item}</span>
+      <div className="list-item-right-div-first-of-type">
+        <div>
+          <button onClick={() => handleQuantity(index, list[index].quantity - 1, list, setList)}>-</button>
+          <input type="text" className="list-quantity-input" onChange={e => quantityOnChange(e)} value={list[index].quantity} onFocus={event => event.target.select()}></input>
+          <button onClick={() => handleQuantity(index, list[index].quantity - (-1), list, setList)}>+</button>
+        </div>
+
+        <span className="list-item-menu-dots" onClick={() => setMiniMenuDroppedDown(prevMiniMenuDropdown => !prevMiniMenuDropdown.droppedDown || prevMiniMenuDropdown.index !== index ? {droppedDown: true, index: index, list: "groceryList"} : {droppedDown: false, index: null, list: "groceryList"})}>
+          <BsThreeDotsVertical />
+        </span>
+      </div></> 
+      : 
+      <><div className="checkbox" type="checkbox" onClick={checkOffItem}><MdOutlineCheckBoxOutlineBlank/></div>
       <span className="list-item-text">{list[index].item}</span>
       <div className="list-item-right-div">
         <div>
@@ -114,9 +129,8 @@ export default function ListItems(props) {
         <span className="list-item-menu-dots" onClick={() => setMiniMenuDroppedDown(prevMiniMenuDropdown => !prevMiniMenuDropdown.droppedDown || prevMiniMenuDropdown.index !== index ? {droppedDown: true, index: index, list: "groceryList"} : {droppedDown: false, index: null, list: "groceryList"})}>
           <BsThreeDotsVertical />
         </span>
-      </div>
-
-
+      </div></>
+      }
     </>
     )
   }

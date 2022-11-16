@@ -55,6 +55,14 @@
     appearance: none;
   }
 
+  .dropdown-form > input:focus {
+    outline: none;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+  }
+
   .dropdown-items {
     position: relative;
   }

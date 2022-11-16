@@ -6,7 +6,7 @@ import {handleDelete} from './scripts/handleLists'
 import ListItems from './components/ListItem/ListItems'
 import CheckedListItems from './components/ListItem/CheckedListItems'
 import {DropDownList} from './components/DropDownList/DropDownList'
-import MiniMenuDropDown from './components/MiniMenuDropDown/MiniMenuDropDown'
+import {MiniMenuDropDown} from './components/MiniMenuDropDown/MiniMenuDropDown'
 import {FaArrowDown} from 'react-icons/fa'
 
 
@@ -22,7 +22,8 @@ function App() {
   const [categoryChange, setCategoryChange] = useState({isChanging: false, index: null, value: ""})
   const [miniMenuDroppedDown, setMiniMenuDroppedDown] = useState({droppedDown: false, index: null, list: "groceryList"})
   const [usedListToAdd, setUsedListToAdd] = useState({bool: false, firstTime: false})
-  const wrapperRef = useRef();
+  const dropDownRef = useRef();
+  const miniMenuRef = useRef();
 
   useEffect(() => {
     localStorage.setItem('groceryList', JSON.stringify(groceryList))
@@ -205,18 +206,34 @@ function App() {
   
 
   useEffect(() => {
-    window.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("touchstart", handleClickOutside);
+    window.addEventListener("mousedown", handleDropDownClickOutside);
+    window.addEventListener("touchstart", handleDropDownClickOutside);
     return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("touchstart", handleClickOutside);
+      window.removeEventListener("mousedown", handleDropDownClickOutside);
+      window.removeEventListener("touchstart", handleDropDownClickOutside);
     }
-  })
+  }, [])
 
-  const handleClickOutside = event => {
-    const { current: wrap } = wrapperRef;
+  useEffect(() => {
+    window.addEventListener("mousedown", handleMiniMenuClickOutside);
+    window.addEventListener("touchstart", handleMiniMenuClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleMiniMenuClickOutside);
+      window.removeEventListener("touchstart", handleMiniMenuClickOutside);
+    }
+  }, [])
+
+  const handleDropDownClickOutside = event => {
+    const { current: wrap } = dropDownRef;
     if (wrap && !wrap.contains(event.target)) {
       setDisplayAddItems(false);
+    }
+  }
+
+  const handleMiniMenuClickOutside = event => {
+    const { current: wrap } = miniMenuRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setMiniMenuDroppedDown({droppedDown: false, index: null, list: "groceryList"});
     }
   }
 
@@ -236,7 +253,6 @@ function App() {
 
       {displayAddItems ? 
       <div>
-
       <DropDownList
         savedGroceries={savedGroceries}
         setSavedGroceries={setSavedGroceries}
@@ -245,7 +261,7 @@ function App() {
         handleSubmit={handleSubmit}
         groceryList={groceryList}
         checkedList={checkedList}
-        ref={wrapperRef}
+        ref={dropDownRef}
         displayAddItems={displayAddItems}
         setDisplayAddItems={setDisplayAddItems}
         setMiniMenuDroppedDown={setMiniMenuDroppedDown}
@@ -285,7 +301,8 @@ function App() {
       /> : null}
       </DragDropContext>
       {miniMenuDroppedDown.droppedDown ? 
-      <MiniMenuDropDown 
+      <MiniMenuDropDown
+            ref={miniMenuRef}
             groceryList={groceryList} 
             setGroceryList={setGroceryList} 
             checkedList={checkedList}

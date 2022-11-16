@@ -53,7 +53,6 @@ const dropDownDiv = (item, index, setSavedGroceries, groceryList, checkedList, h
         </span> 
         {groceryList.some(grocery => grocery.item === item) ? <div className="dropdown-item-onlist-text">Already on list</div> : null}
         {checkedList.some(grocery => grocery.item === item) ? <div className="dropdown-item-checked-text">Checked Off</div> : null}
-
       </div>
       )
   }

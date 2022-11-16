@@ -5,7 +5,7 @@
     padding-block: 1rem;
     width: 95vw;
     max-width: 400px;
-    bottom: 20px;
+    bottom: 0rem;
     z-index: 5;
     margin: 0;
     left: 50%;
@@ -17,17 +17,20 @@
     cursor: pointer;
    }
 
+
    .mini-menu-dropdown-item {
     margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: 1rem;
+    margin-block: 1.2rem;
+    font-size: 1.1rem;
     padding-inline: 1rem;
     text-align: center;
     position: relative;
     width: fit-content;
     padding-inline: 1rem;
+  
   }
 
   .mini-menu-dropdown-arrow {

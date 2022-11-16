@@ -26,27 +26,21 @@
     display: flex;
     justify-content: space-between;
     align-items:center;
-    margin: 0.5rem 0;
+    margin: 0.1rem 0;
     border-bottom: 1px solid var(--border-color);
     padding-block: 1rem;
-    margin-inline: 0.5rem;
-    animation-name: slideIn;
-    /* animation-duration: 0.5s;
-    animation-iteration-count: 1; */
+    margin-inline: 0.5rem;  
   }
-/* 
-  @keyframes slideIn {
-    0% {
-      opacity: 0%;
-      transform: translateX(-100%);
-    }
-    100% {
-      opacity: 100%;
-      transform: translateX(0);
-    }
-  } */
+
   
   .list-item-text {
+    max-width: 8rem;
+    word-wrap: break-word;
+    overflow: hidden;
+  }
+
+  .list-item-text-first-of-type {
+    margin-top: 1.2rem;
     max-width: 8rem;
     word-wrap: break-word;
     overflow: hidden;
@@ -78,7 +72,20 @@
     align-items: center;
   }
 
+  .list-item-right-div-first-of-type {
+    display: flex;
+    align-items: center;
+    margin-top: 1.2rem;
+  }
+
   .list-item-right-div button {
+    padding: 0.5rem;
+    padding-inline: 0.75rem;
+    margin-block: 0;
+    box-shadow: 1px 1px 5px var(--border-color);
+  }
+
+  .list-item-right-div-first-of-type button {
     padding: 0.5rem;
     padding-inline: 0.75rem;
     margin-block: 0;
@@ -92,15 +99,13 @@
     padding: 0;
     margin: 0;
     width: max-content;
-    font-size: 0.7rem;
-    top: 0rem;
+    top: 0.5rem;
     left: 0.15rem;
 
   }
 
   .list-item-category-form {
     border: none;
-    font-size: 0.7rem;
     position: absolute;
     z-index: 1;
     top: -0.35rem;
@@ -109,18 +114,19 @@
   }
   
   .list-item-category-form > input[type="text"] {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin: 0;
     padding: 0;
     background: none;
     appearance: none;
     border: none;
     cursor: pointer;
-    text-indent: 7px;
     font-weight: bold;
-    color: rgb(63, 130, 56)
+    text-indent: 7px;
+    color: rgb(63, 130, 56);
 
   }
+
 
   /* .list-item-category-form > input[type="text"]:focus, .list-item-category-form > input[type="text"]:focus:hover {
     background-color: white;
@@ -156,6 +162,17 @@
     margin-left: 0.5rem;
     color: var(--checkbox-color);
   }
+
+  .checkbox-first-of-type{
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2.2rem;
+    margin-left: 0.5rem;
+    color: var(--checkbox-color);
+  }
+
 
   .quantity {
     cursor: pointer;
@@ -222,7 +239,7 @@
 
  .first-vertical-line {
   position: absolute;
-  height: 93%;
+  height: 85%;
   bottom: -1px;
   margin-left: -4px;
   width: 1px;
@@ -233,7 +250,7 @@
  .first-horizontal-line {
   position: absolute;
   border-top: 1px solid var(--border-color);
-  top: 0;
+  top: 10%;
   margin-top: 5px;
   width: 4px;
   margin-left: -4px;
