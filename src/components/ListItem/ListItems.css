@@ -59,6 +59,7 @@
     display: inline-flex;
     align-items: center;
     margin-bottom: 0;
+    margin-inline: 0.15rem;
     cursor: pointer;
     font-size: 1.2rem;
   }

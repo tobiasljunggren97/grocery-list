@@ -15,7 +15,7 @@
     border-radius: 7px;
     box-shadow: 1px 1px 5px var(--border-color);
     cursor: pointer;
-    max-height: 90vh;
+    max-height: 95vh;
 
    }
 
@@ -23,7 +23,7 @@
   .mini-menu-categories-list {
     border-bottom: 1px solid var(--border-color);
     overflow-y: scroll;
-    max-height: 50vh;
+    max-height: 62vh;
 
   }
 
