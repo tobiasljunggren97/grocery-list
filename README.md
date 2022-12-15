@@ -4,6 +4,10 @@ Grocery list made with React Js.
 
 **Check it out [here](https://tobias-grocery-list.netlify.app/).**
 
+
+
+![](https://i.imgur.com/NKHEvVL.png)
+
 Features:
 - Add and check off grocery items. 
 - All items added saved for later, for easy access in a drop-down menu when you would like to add them again
